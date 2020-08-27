@@ -1,8 +1,8 @@
 function isLucky(number) {
   number = number.toString();
 
-  let firstPart = 0;
-  let secondPart = 0;
+  let firstHalfSum = 0;
+  let secondHalfSum = 0;
 
   const middle = number.length / 2;
 
@@ -10,13 +10,13 @@ function isLucky(number) {
     const indexIsBeforeTheMiddle = i < middle;
 
     if(indexIsBeforeTheMiddle) {
-      firstPart += Number(number[i]);
+      firstHalfSum += Number(number[i]);
     } else {
-      secondPart += Number(number[i]);
+      secondHalfSum += Number(number[i]);
     }
   }
 
-  return firstPart == secondPart 
+  return firstHalfSum == secondHalfSum
 }
 
-console.log(isLucky(1230));
+console.log(isLucky(1331));
