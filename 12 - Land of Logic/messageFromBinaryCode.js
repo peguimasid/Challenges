@@ -1,3 +1,7 @@
+function transfromBinaryIntoChar(aBinary) {
+  return String.fromCharCode(parseInt(aBinary, 2))
+}
+
 function messageFromBinaryCode(code) {
   let result = ''
 
@@ -14,7 +18,7 @@ function messageFromBinaryCode(code) {
   }
 
   binariesArray.forEach(binary => {
-    result += String.fromCharCode(parseInt(binary, 2))
+    result += transfromBinaryIntoChar(binary)
   })
 
   return result
