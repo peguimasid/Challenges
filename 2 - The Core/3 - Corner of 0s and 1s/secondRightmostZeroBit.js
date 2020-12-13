@@ -1,7 +1,5 @@
 function secondRightmostZeroBit(n) {
   return (function(input) {
-    // Fuck your "only change the ..." policy
-    
     var result = 0;
     var zeroFound = false;
     
