@@ -16,7 +16,7 @@ function candles(candlesNumber, makeNew) {
 
   helper(leftOvers)
 
-  return 
+  return result
 }
 
 console.log(candles(15, 5))
