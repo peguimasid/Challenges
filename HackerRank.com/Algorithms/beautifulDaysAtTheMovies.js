@@ -1,9 +1,7 @@
 function beautifulDays(i, j, k) {
-  let count = 0
-
   return Array
     .from({ length: j - i + 1 })
-    .map(num => i + count++)
+    .map((_num, index) => i + index)
     .filter(num => Number.isInteger(((num - Number(String(num).split('').reverse().join(''))) / k))).length
 }
 
