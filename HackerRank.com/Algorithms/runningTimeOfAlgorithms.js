@@ -10,8 +10,6 @@ function runningTime(array) {
     }
 
     array[j + 1] = currentVal;
-
-    temp = [...array];
   }
 
   return result;
