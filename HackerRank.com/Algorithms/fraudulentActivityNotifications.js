@@ -1,31 +1,37 @@
+const isEven = (number) => number % 2 === 0;
+
+function calculateMedian(array) {
+  if (isEven(array.length)) {
+    return (
+      (array[Math.floor(array.length / 2)] +
+        array[Math.ceil(array.length / 2)]) /
+      2
+    );
+  } else {
+    return array[Math.floor(array.length / 2)];
+  }
+}
+
 function activityNotifications(expenditure, d) {
-  // Number of notifications
-  let n = 0;
+  let warnings = 0;
 
-  // Set midpoints for median calculation
-  let [i1, i2] = [Math.floor((d - 1) / 2), Math.ceil((d - 1) / 2)];
-  let m1, m2, m;
+  for (let i = d, j = 0; i < expenditure.length; i++, j++) {
+    const currentExpense = expenditure[i];
 
-  // Initialize count sorted subarray
-  let cs = new Array(201).fill(0);
-  for (let i = d - 1; i >= 0; i--) cs[expenditure[i]]++;
+    const previousExpenses = [];
 
-  // Iterate through expenditures
-  for (let i = d; i < expenditure.length; i++) {
-    // Find median
-    for (let j = 0, k = 0; k <= i1; k += cs[j], j++) m1 = j;
-    for (let j = 0, k = 0; k <= i2; k += cs[j], j++) m2 = j;
-    let m = (m1 + m2) / 2;
+    for (let currDay = j; currDay < i; currDay++) {
+      previousExpenses.push(expenditure[currDay]);
+    }
 
-    // Check if notification is given
-    if (expenditure[i] >= m * 2) n++;
+    previousExpenses.sort((a, b) => a - b);
 
-    // Replace subarray elements
-    cs[expenditure[i - d]]--;
-    cs[expenditure[i]]++;
+    const median = calculateMedian(previousExpenses);
+
+    if (currentExpense >= median * 2) warnings++;
   }
 
-  return n;
+  return warnings;
 }
 
 console.log(activityNotifications([2, 3, 4, 2, 3, 6, 8, 4, 5], 5));
