@@ -1,11 +1,10 @@
 function balancedSums(array) {
+  let leftSum = 0;
+  let rightSum = array.reduce((acc, curr) => acc + curr);
+
   for (let i = 0; i < array.length; i++) {
-    let leftSum = array
-      .slice(0, i)
-      .reduce((acc, currentVal) => acc + currentVal, 0);
-    let rightSum = array
-      .slice(i + 1)
-      .reduce((acc, currentVal) => acc + currentVal, 0);
+    if (array[i - 1]) leftSum += array[i - 1];
+    rightSum -= array[i];
 
     if (leftSum === rightSum) return 'YES';
   }
