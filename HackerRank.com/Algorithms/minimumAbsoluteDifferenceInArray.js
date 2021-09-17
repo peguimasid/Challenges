@@ -1,17 +1,16 @@
 function minimumAbsoluteDifference(array) {
+  array.sort((a, b) => a - b);
+
   let result = Infinity;
 
   for (let i = 0; i < array.length - 1; i++) {
-    const currentValue = array[i];
+    const curr = array[i];
+    const next = array[i + 1];
 
-    for (let j = i + 1; j < array.length; j++) {
-      const nextValue = array[j];
-
-      const diff = Math.abs(currentValue - nextValue);
-
-      if (diff < result) result = diff;
-    }
+    if (Math.abs(curr - next) < result) result = Math.abs(curr - next);
   }
 
   return result;
 }
+
+console.log(minimumAbsoluteDifference([3, -7, 0]));
