@@ -9,35 +9,36 @@ function swap(i, j, array) {
 }
 
 function largestPermutation(k, arr) {
-  let result = arr;
+  let max = Math.max(...arr);
 
-  for (let i = 0; i < k; i++) {
-    let largestSwap = result;
+  let idx = 0;
+  let hash = arr.reduce(
+    (acc, currentValue, index) => acc.set(currentValue, index),
+    new Map()
+  );
 
-    for (let j = 0; j < arr.length; j++) {
-      for (let p = j + 1; p < arr.length; p++) {
-        const swapped = swap(j, p, result);
+  let i = 0;
 
-        if (Number(swapped.join('')) > Number(largestSwap.join(''))) {
-          largestSwap = swapped;
-        }
-      }
-    }
-
-    if (Number(largestSwap.join('')) > Number(result.join(''))) {
-      result = largestSwap;
+  while (i < k && i < arr.length) {
+    if (!hash.has(max)) {
+      max--;
+      i++;
+    } else if (arr[idx] === max) {
+      idx++;
+      max--;
+    } else {
+      const maxIdx = hash.get(max);
+      hash.set(arr[idx], maxIdx);
+      hash.set(max, idx);
+      arr[maxIdx] = arr[idx];
+      arr[idx++] = max--;
+      i++;
     }
   }
 
-  return result;
+  return arr;
 }
 
 console.log(largestPermutation(1, [1, 2, 3, 4]));
 // console.log(largestPermutation(1, [4, 2, 3, 5, 1]));
 // console.log(largestPermutation(1, [2, 1]));
-
-// Para resolvermos esse problema vamos fazer o seguinte
-
-// - Criamos uma variavel result que comeca com o valor da array inicial
-// - Para cada unidade de K, nos achamos a maior permutação e setamos result para ser essa permutação
-// - no final vamos ter a maior permutação possivel
