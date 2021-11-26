@@ -1,45 +1,29 @@
-// function swap(array, i, j) {
-//   let temp = array[i];
-//   array[i] = array[j];
-//   array[j] = temp;
-// }
-
-// function removeZeros(array) {
-//   let swaps = 0;
-
-//   for (let i = 0; i < array.length; i++) {
-//     console.log(array[i]);
-//   }
-
-//   return array;
-// }
-
-function filterZeros(array) {
-  let result = [];
-
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] === 0 || array[i] === '0') result.push(array[i]);
-  }
-
-  return result;
+function swap(array, i, j) {
+  let temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
 }
 
-function filterNoZeros(array) {
-  let result = [];
-
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] !== 0 && array[i] !== '0') result.push(array[i]);
-  }
-
-  return result;
-}
+const isZero = (value) => value === 0 || value === '0';
 
 function removeZeros(array) {
-  let zeros = filterZeros(array);
-  let noZeros = filterNoZeros(array);
-  console.log(zeros);
+  let swaps = 0;
 
-  return [...noZeros, ...zeros];
+  let i = 0;
+
+  while (i < array.length - swaps) {
+    if (isZero(array[i])) {
+      let j = i;
+
+      while (j < array.length - 1) swap(array, j, ++j);
+
+      swaps++;
+    }
+
+    if (!isZero(array[i])) i++;
+  }
+
+  return array;
 }
 
-console.log(removeZeros([1, null, '5', '2', 8, 6, null, false, '0', 0]));
+console.log(removeZeros([7, 2, 3, 0, 4, 6, 0, '0', 13, 0, 78, 0, 0, 19, 14]));
