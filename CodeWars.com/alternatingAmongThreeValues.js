@@ -1,9 +1,10 @@
 function f(x, cc) {
-  return Object.values(cc)[
-    Object.values(cc).findIndex((item) => item === x) + 1
-  ] !== undefined
-    ? Object.values(cc)[Object.values(cc).findIndex((item) => item === x) + 1]
-    : Object.values(cc)[0];
+  const valuesArray = Object.values(cc);
+  const findNumberIndex = valuesArray.findIndex((number) => number === x);
+
+  return findNumberIndex + 1 === valuesArray.length
+    ? valuesArray[0]
+    : valuesArray[findNumberIndex + 1];
 }
 
-console.log(f(4, { a: 3, b: 4, c: 5 }));
+console.log(f(5, { a: 3, b: 4, c: 5 }));
