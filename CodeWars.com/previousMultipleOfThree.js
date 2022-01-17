@@ -1,14 +1,8 @@
-const prevMultOfThree = (n) => {
-  let i = String(n).length;
-
-  while (i > 0) {
-    const currentNum = Number(String(n).slice(0, i));
-
-    if (currentNum % 3 === 0) return currentNum;
-    i--;
-  }
-
-  return null;
-};
+const prevMultOfThree = (n) =>
+  Array(String(n).length)
+    .fill(0)
+    .map((_item, index) => Number(String(n).slice(0, index + 1)))
+    .reverse()
+    .find((number) => number % 3 === 0) || null;
 
 console.log(prevMultOfThree(952406));
