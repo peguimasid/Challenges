@@ -6,12 +6,12 @@ function simpson(n) {
   let h = Math.PI / n;
 
   let s1 = 0;
-  for (let i = 1; i <= ~~(n / 2); i++) {
+  for (let i = 1; i <= Math.floor(n / 2); i++) {
     s1 += f((2 * i - 1) * h);
   }
 
   let s2 = 0;
-  for (let i = 1; i <= ~~(n / 2) - 1; i++) {
+  for (let i = 1; i <= Math.floor(n / 2) - 1; i++) {
     s2 += f(2 * i * h);
   }
 
