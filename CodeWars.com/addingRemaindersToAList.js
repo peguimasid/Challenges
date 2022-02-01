@@ -5,8 +5,6 @@ function getClosestMultiple(number, div) {
   }
 }
 
-// console.log(getClosestMultiple(40, 3));
-
 const solve = (nums, div) =>
   nums.map((number) => (number += number - getClosestMultiple(number, div)));
 
