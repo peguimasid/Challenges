@@ -2,7 +2,6 @@ function partsSums(ls) {
   ls.unshift(0);
   let sum = ls.reduce((acc, curr) => acc + curr, 0);
   return ls.map((item) => (sum = sum - item));
-  console.log(ls, sum);
 }
 
 console.log(partsSums([0, 1, 3, 6, 10]));
