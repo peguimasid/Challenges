@@ -1,7 +1,7 @@
 function describeTheShape(angles) {
   if (angles <= 2) return 'this will be a line segment or a dot';
 
-  const angle = ((angles - 2) * 180) / angles;
+  const angle = Math.floor(((angles - 2) * 180) / angles);
 
   return `This shape has ${angles} sides and each angle measures ${angle}`;
 }
