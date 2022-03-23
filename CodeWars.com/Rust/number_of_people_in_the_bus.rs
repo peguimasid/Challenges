@@ -1,11 +1,5 @@
 fn number(bus_stops:&[(i32,i32)]) -> i32 {
-  let mut result: i32 = 0;
-
-  for (num_people_in_the_bus, num_people_drop_the_bus) in bus_stops.iter() {
-    result += num_people_in_the_bus - num_people_drop_the_bus;
-  }
-
-  result
+  bus_stops.iter().fold(0, |acc, stop| acc + stop.0 - stop.1)
 }
 
 fn main() {
