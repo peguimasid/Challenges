@@ -8,7 +8,7 @@ fn make_ascii_titlecase(mut s: String) -> String {
   s.to_string()
 }
 
-fn accum(s:&str)-> String {
+fn accum(s: &str) -> String {
   let mut result = String::from("");
 
   for i in s.char_indices() {

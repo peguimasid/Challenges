@@ -5,9 +5,13 @@ fn high_and_low(numbers: &str) -> String {
   for character in numbers.split_ascii_whitespace() {
     let char_to_string = character.to_string();
     let n: f64 = char_to_string.parse().unwrap();
-    
-    if n > bigger { bigger = n; };
-    if n < smaller { smaller = n; };
+
+    if n > bigger {
+      bigger = n;
+    };
+    if n < smaller {
+      smaller = n;
+    };
   }
 
   return format!("{} {}", bigger, smaller);
