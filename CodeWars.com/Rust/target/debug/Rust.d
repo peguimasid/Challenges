@@ -1,0 +1,1 @@
+/Users/guilhermomasid/Desktop/Desafios/CodeWars.com/Rust/target/debug/Rust: /Users/guilhermomasid/Desktop/Desafios/CodeWars.com/Rust/src/exercises/sum_of_digits.rs /Users/guilhermomasid/Desktop/Desafios/CodeWars.com/Rust/src/main.rs

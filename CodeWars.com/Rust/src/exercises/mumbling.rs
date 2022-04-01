@@ -8,7 +8,7 @@ fn make_ascii_titlecase(mut s: String) -> String {
   s.to_string()
 }
 
-fn accum(s: &str) -> String {
+pub fn accum(s: &str) -> String {
   let mut result = String::from("");
 
   for i in s.char_indices() {
@@ -21,10 +21,6 @@ fn accum(s: &str) -> String {
   }
 
   result
-}
-
-fn main() {
-  println!("{}", accum("ZpglnRxqenU"));
 }
 
 // ANOTHER SOL
