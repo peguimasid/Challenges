@@ -4,18 +4,14 @@
  */
 const maxArea = (height) => {
   let result = 0;
+  let l = 0;
+  let r = height.length - 1;
 
-  for (let i = 0; i < height.length; i++) {
-    const firstColumnHeight = height[i];
+  while (l < r) {
+    let currentSquareArea = (r - l) * Math.min(height[l], height[r]);
+    result = Math.max(result, currentSquareArea);
 
-    for (let j = i + 1; j < height.length; j++) {
-      const secondColumnHeight = height[j];
-      const width = j - i;
-
-      let volume = Math.min(firstColumnHeight, secondColumnHeight) * width;
-
-      if (volume > result) result = volume;
-    }
+    height[l] < height[r] ? l++ : r--;
   }
 
   return result;
