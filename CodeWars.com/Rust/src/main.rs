@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
-#[path = "exercises/sum_of_digits.rs"]
+#[path = "exercises/find_multiples_of_a_number.rs"]
 mod my_mod;
 
 fn main() {
-  println!("{}", my_mod::digital_root(234567890));
+  println!("{:?}", my_mod::find_multiples(4, 27));
 }
