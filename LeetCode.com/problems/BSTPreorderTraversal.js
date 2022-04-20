@@ -15,8 +15,8 @@ var preorderTraversal = function (root) {
 
   const preOrder = (node) => {
     result.push(node.val);
-    if (node.right) preOrder(node.right);
     if (node.left) preOrder(node.left);
+    if (node.right) preOrder(node.right);
   };
 
   if (root) preOrder(root);
