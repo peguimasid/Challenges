@@ -1,38 +1,36 @@
 class MyStack {
   constructor() {
-    this.stack = [];
+    this.out = []; // out
+    this.in = [];
   }
 
-  /**
-   * @param {number} x
-   * @return {void}
-   */
   push(x) {
-    this.stack.push(x);
+    const { length } = this.out;
+
+    for (let i = 0; i < length; i++) {
+      this.in.unshift(this.out.pop());
+    }
+
+    this.out.unshift(x);
+
+    for (let i = 0; i < length; i++) {
+      this.out.unshift(this.in.pop());
+    }
   }
-  /**
-   * @return {number}
-   */
   pop() {
-    return this.stack.pop() ?? null;
+    return this.out.pop() ?? null;
   }
-  /**
-   * @return {number}
-   */
   top() {
-    return this.stack[this.stack.length - 1] ?? null;
+    return this.out[this.out.length - 1] ?? null;
   }
-  /**
-   * @return {boolean}
-   */
   empty() {
-    return !this.stack.length;
+    return !this.out.length;
   }
 }
 
 var obj = new MyStack();
 obj.push(1);
-var param_4 = obj.empty();
-console.log(param_4);
-var param_2 = obj.pop();
-var param_3 = obj.top();
+obj.push(2);
+obj.push(3);
+obj.push(4);
+obj.push(5);
