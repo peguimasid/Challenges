@@ -3,13 +3,16 @@
  * @return {boolean}
  */
 const find132pattern = (nums) => {
-  let min = nums[0];
-  for (let i = 0; i < nums.length - 1; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
-      if (nums[j] > min && nums[i] > nums[j]) return true;
-      min = Math.min(min, nums[i]);
-    }
+  let stack = [];
+  let thirdElement = Number.NEGATIVE_INFINITY;
+
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (nums[i] < thirdElement) return true;
+    while (stack.length && stack[stack.length - 1] < nums[i])
+      thirdElement = stack.pop();
+    stack.push(nums[i]);
   }
+
   return false;
 };
 
