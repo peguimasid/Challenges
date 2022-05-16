@@ -1,28 +1,33 @@
 /**
- * @param {number[]} arr
- * @return {boolean}
- */
-const isSortedWithoutElement = (arr, i) => {
-  const work = [...arr];
-  work.splice(i, 1);
-  const sorted = [...work].sort((a, b) => a - b);
-
-  return JSON.stringify(work) === JSON.stringify(sorted);
-};
-
-/**
  * @param {number[]} nums
  * @return {boolean}
  */
 const checkPossibility = (nums) => {
-  for (let i = 0; i < nums.length; i++) {
-    if (isSortedWithoutElement(nums, i)) return true;
+  let count = 0;
+
+  for (let i = 1; i < nums.length; i++) {
+    console.log(nums);
+    let curr = nums[i];
+    let prev = nums[i - 1];
+    if (curr < prev) {
+      count++;
+      if (count > 1) return false;
+
+      const prevprev = nums[i - 2];
+      !prevprev || prevprev <= curr
+        ? (nums[i - 1] = nums[i])
+        : (nums[i] = nums[i - 1]);
+    }
   }
 
-  return false;
+  return true;
 };
 
-console.log(checkPossibility([4, 2, 1]));
+console.log(checkPossibility([4, 2, 3]));
+// console.log('\n');
+// console.log(checkPossibility([4, 2, 1]));
+// console.log('\n');
+console.log(checkPossibility([3, 4, 2, 3]));
 
 // for each element nums
 // we remove this element and check if array becomes sorted (1, 2, 3, 4)
