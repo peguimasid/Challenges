@@ -3,6 +3,7 @@
  * @return {number}
  */
 const numberOfSteps = (num) => {
+  if (num === 0) return 0;
   let result = 1;
 
   const helper = (num) => {
