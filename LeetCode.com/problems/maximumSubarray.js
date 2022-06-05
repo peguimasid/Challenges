@@ -4,14 +4,12 @@
  */
 const maxSubArray = (nums) => {
   let result = -Infinity;
+  let sum = 0;
 
   for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j <= nums.length; j++) {
-      result = Math.max(
-        result,
-        nums.slice(i, j).reduce((acc, curr) => acc + curr)
-      );
-    }
+    sum += nums[i];
+    result = Math.max(sum, result);
+    if (sum < 0) sum = 0;
   }
 
   return result;
