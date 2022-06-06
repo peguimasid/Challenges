@@ -9,24 +9,19 @@ function ListNode(val) {
  * @return {ListNode}
  */
 var getIntersectionNode = function (headA, headB) {
-  let a = [];
   let b = [];
 
-  let curr = headA;
-  while (curr) {
-    a.push(curr);
-    curr = curr.next;
+  while (headB) {
+    b.push(headB);
+    headB = headB.next;
   }
 
-  curr = headB;
-  while (curr) {
-    b.push(curr);
-    curr = curr.next;
-  }
+  let currentNode = headA;
 
-  for (let currentNode = headA; currentNode; currentNode = currentNode.next) {
+  while (currentNode) {
     const findNode = b.find((node) => node === currentNode);
     if (findNode) return findNode;
+    currentNode = currentNode.next;
   }
 
   return null;
