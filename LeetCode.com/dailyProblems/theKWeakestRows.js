@@ -4,7 +4,7 @@
  * @return {number[]}
  */
 const kWeakestRows = (mat, k) => {
-  const soldiedFrequencyCounter = mat
+  const soldiersFrequencyCounter = mat
     .map((array) => array.filter((item) => item === 1).length)
     .reduce((acc, curr, index) => {
       acc[index] = curr;
@@ -12,7 +12,7 @@ const kWeakestRows = (mat, k) => {
       return acc;
     }, {});
 
-  return Object.entries(soldiedFrequencyCounter)
+  return Object.entries(soldiersFrequencyCounter)
     .sort((a, b) => a[1] - b[1])
     .map((i) => Number(i[0]))
     .slice(0, k);
