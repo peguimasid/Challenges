@@ -3,11 +3,9 @@
  * @return {boolean}
  */
 const judgeSquareSum = (c) => {
-  for (let i = 0; i < Math.ceil(c / 2) + 1; i++) {
-    for (let j = 0; j < Math.ceil(c / 2) + 1; j++) {
-      // console.log(i ** 2, i ** 2);
-      if (i ** 2 + j ** 2 === c) return true;
-    }
+  for (let i = 0; i * i <= c; i++) {
+    const square = Math.sqrt(c - i * i);
+    if (Math.round(square) === square) return true;
   }
 
   return false;
