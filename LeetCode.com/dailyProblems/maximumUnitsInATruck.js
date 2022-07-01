@@ -6,19 +6,16 @@
 const maximumUnits = (boxTypes, truckSize) => {
   boxTypes.sort((a, b) => b[1] - a[1]);
 
-  let resultUnits = 0;
+  let result = 0;
 
-  for (let i = 0; i < boxTypes.length; i++) {
-    const [boxAmount, unitsInBox] = boxTypes[i];
-
-    for (let j = 0; j < boxAmount; j++) {
-      if (!truckSize) return resultUnits;
-
-      resultUnits += unitsInBox;
-      truckSize--;
-    }
+  for (const [numberOfBoxes, unitsPerBox] of boxTypes) {
+    const takeBoxes = Math.min(numberOfBoxes, truckSize);
+    result += takeBoxes * unitsPerBox;
+    truckSize -= takeBoxes;
+    if (!truckSize) break;
   }
-  return resultUnits;
+
+  return result;
 };
 
 console.log(
