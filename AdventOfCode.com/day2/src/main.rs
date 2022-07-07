@@ -2,6 +2,7 @@ impl Dive {
   fn solution(planned_course: Vec<&str>) -> i32 {
     let mut horizontal_position = 0;
     let mut depth = 0;
+    let mut aim = 0;
 
     for movement in planned_course {
       let movement: Vec<&str> = movement.split(' ').collect();
@@ -9,9 +10,12 @@ impl Dive {
       let movement_value: i32 = movement[1].parse().unwrap();
 
       match movement_type {
-        "forward" => horizontal_position += movement_value,
-        "up" => depth -= movement_value,
-        "down" => depth += movement_value,
+        "forward" => {
+          horizontal_position += movement_value;
+          depth += aim * movement_value;
+        }
+        "up" => aim -= movement_value,
+        "down" => aim += movement_value,
         _ => (),
       }
     }
