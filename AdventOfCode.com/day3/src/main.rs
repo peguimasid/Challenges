@@ -1,23 +1,33 @@
 impl BinaryDiagnostic {
   fn solution(diagnostic: Vec<&str>) -> i32 {
-    // println!("{:?}", diagnostic[0].chars().nth(0).unwrap());
-    // println!("{:?}", diagnostic[1].chars().nth(0).unwrap());
-    // println!("{:?}", diagnostic[2].chars().nth(0).unwrap());
-    let mut result = Vec::<i32>::new();
+    let mut gamma_rate = String::new();
+    let mut epsilon_rate = String::new();
 
     for i in 0..diagnostic[0].chars().count() {
+      let mut one_count = 0;
+      let mut zero_count = 0;
+
       for j in 0..diagnostic.len() {
-        println!(
-          "{} <<>> i = {} | j = {}",
-          diagnostic[j].chars().nth(i).unwrap(),
-          i,
-          j
-        );
+        match diagnostic[j].chars().nth(i).unwrap() {
+          '0' => zero_count += 1,
+          '1' => one_count += 1,
+          _ => (),
+        }
+      }
+
+      if one_count > zero_count {
+        gamma_rate.push('1');
+        epsilon_rate.push('0');
+      } else {
+        gamma_rate.push('0');
+        epsilon_rate.push('1');
       }
     }
 
-    // println!("{:?}", result);
-    42
+    let gamma_to_int = isize::from_str_radix(gamma_rate.as_str(), 2).unwrap();
+    let epsilon_to_int = isize::from_str_radix(epsilon_rate.as_str(), 2).unwrap();
+
+    (gamma_to_int * epsilon_to_int).try_into().unwrap()
   }
 }
 struct BinaryDiagnostic;
