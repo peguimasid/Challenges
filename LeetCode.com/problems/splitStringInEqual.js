@@ -3,7 +3,7 @@
  * @return {number}
  */
 const balancedStringSplit = (s) => {
-  let result = [];
+  let result = 0;
 
   let lcount = 0;
   let rcount = 0;
@@ -12,8 +12,7 @@ const balancedStringSplit = (s) => {
 
   for (let i = 0; i <= s.length; i++) {
     if (lcount == rcount && lcount + rcount != 0) {
-      result.push(s.slice(startIndex, i));
-      startIndex = i;
+      result++;
       rcount = 0;
       lcount = 0;
     }
@@ -21,7 +20,7 @@ const balancedStringSplit = (s) => {
     if (s[i] == 'L') lcount++;
   }
 
-  return result.length;
+  return result;
 };
 
 console.log(balancedStringSplit('RLRRLLRLRL'));
