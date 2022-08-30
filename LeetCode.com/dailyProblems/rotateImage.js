@@ -3,15 +3,9 @@
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 const rotate = (matrix) => {
-  let result = Array.from({ length: matrix.length }, () => []);
-
-  for (let i = 0; i < matrix.length; i++) {
-    for (let j = matrix.length - 1; j >= 0; j--) {
-      result[i].push(matrix[j][i]);
-    }
-  }
-
-  return result;
+  for (let i = 0; i < matrix.length; i++)
+    for (let j = matrix.length - 1; j >= 0; j--)
+      matrix[i].push(matrix[j].shift());
 };
 
 console.log(
