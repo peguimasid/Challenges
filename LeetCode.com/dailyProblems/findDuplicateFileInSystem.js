@@ -3,25 +3,19 @@
  * @return {string[][]}
  */
 const findDuplicate = (paths) => {
-  let result = [];
-  let fileContents = {};
+  let map = {};
 
-  for (const s of paths) {
-    const [path, ...files] = s.split(' ');
+  for (const path of paths) {
+    const [root, ...files] = path.split(' ');
 
     for (const file of files) {
-      const content = file.match(/\(([^)]+)\)/)[1];
-      const fileName = file.replace(`(${content})`, '');
-      if (!fileContents[content]) fileContents[content] = [];
-      fileContents[content].push(`${path}/${fileName}`);
+      const [fileName, content] = file.split('(');
+      if (!map[content]) map[content] = [];
+      map[content].push(`${root}/${fileName}`);
     }
   }
 
-  for (const p of Object.values(fileContents)) {
-    if (p.length > 1) result.push(p);
-  }
-
-  return result;
+  return Object.values(map).filter((value) => value.length > 1);
 };
 
 let paths = [
