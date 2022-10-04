@@ -12,25 +12,14 @@
  * @return {boolean}
  */
 const hasPathSum = (root, targetSum) => {
-  let result = false;
+  if (!root) return false;
 
-  const traverse = (node, sum = 0) => {
-    const isLeafNode = !node?.left && !node?.right;
+  if (!root.left && !root.right) return root.val === targetSum;
 
-    if (isLeafNode) {
-      console.log(sum + node?.val);
-      console.log(sum + node?.val === targetSum);
-    }
-
-    if (isLeafNode && sum + node?.val === targetSum) result = true;
-
-    if (node?.left) traverse(node.left, sum + node.val);
-    if (node?.right) traverse(node.right, sum + node.val);
-  };
-
-  traverse(root);
-
-  return result;
+  return (
+    hasPathSum(root.left, targetSum - root.val) ||
+    hasPathSum(root.right, targetSum - root.val)
+  );
 };
 
 const bt = {
