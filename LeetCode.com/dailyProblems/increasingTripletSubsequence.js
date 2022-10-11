@@ -3,12 +3,12 @@
  * @return {boolean}
  */
 const increasingTriplet = (nums) => {
-  for (let i = 0; i < nums.length - 2; i++) {
-    for (let j = i + 1; j < nums.length - 1; j++) {
-      for (let k = j + 1; k < nums.length; k++) {
-        if (nums[j] - nums[i] > 0 && nums[k] - nums[j] > 0) return true;
-      }
-    }
+  let small = nums[0];
+  let mid = Infinity;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > small && nums[i] < mid) mid = nums[i];
+    if (nums[i] < small) small = nums[i];
+    if (nums[i] > mid) return true;
   }
 
   return false;
