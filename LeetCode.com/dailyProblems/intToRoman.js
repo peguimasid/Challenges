@@ -22,7 +22,7 @@ const intToRoman = (num) => {
   let result = '';
 
   while (num > 0) {
-    const { roman, decimal } = map.find(({ decimal, roman }) => decimal <= num);
+    const { roman, decimal } = map.find(({ decimal }) => decimal <= num);
     result += roman;
     num -= decimal;
   }
