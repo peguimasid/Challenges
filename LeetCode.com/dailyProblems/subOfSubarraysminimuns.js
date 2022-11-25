@@ -3,15 +3,17 @@
  * @return {number}
  */
 const sumSubarrayMins = (arr) => {
-  let subArrays = [];
+  let result = 0;
 
   for (let i = 0; i < arr.length; i++) {
-    for (let j = i + 1; j <= arr.length; j++) {
-      subArrays.push(arr.slice(i, j));
+    let min = arr[i];
+    for (let j = i; j < arr.length; j++) {
+      if (arr[j] < min) min = arr[j];
+      result += min;
     }
   }
 
-  return subArrays.reduce((acc, arr) => (acc += Math.min(...arr)), 0);
+  return result % (1e9 + 7);
 };
 
 // [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2], [1,2,4], [3,1,2,4].
