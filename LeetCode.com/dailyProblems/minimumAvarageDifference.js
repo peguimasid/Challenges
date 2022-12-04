@@ -3,7 +3,7 @@
  * @return {number}
  */
 const minimumAverageDifference = (nums) => {
-  let result = -1;
+  let result = 0;
   let min = Infinity;
 
   let leftSum = 0;
@@ -15,7 +15,7 @@ const minimumAverageDifference = (nums) => {
     rightSum -= num;
     const leftAvg = Math.floor(leftSum / (i + 1));
     const rightAvg =
-      i < nums.length ? Math.floor(rightSum / (nums.length - i - 1)) : 0;
+      i < nums.length - 1 ? Math.floor(rightSum / (nums.length - i - 1)) : 0;
     const abs = Math.abs(leftAvg - rightAvg);
     if (abs < min) {
       min = abs;
