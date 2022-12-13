@@ -3,20 +3,21 @@
  * @return {number}
  */
 const minFallingPathSum = (matrix) => {
-  let result = Infinity;
+  if (matrix.length === 1) return matrix[0][0];
 
-  const fall = (matrix, x, y, sum = 0) => {
-    if (!matrix[x]) return (result = Math.min(sum, result));
-    if (matrix[x][y - 1]) fall(matrix, x + 1, y - 1, sum + matrix[x][y]);
-    if (matrix[x][y]) fall(matrix, x + 1, y, sum + matrix[x][y]);
-    if (matrix[x][y + 1]) fall(matrix, x + 1, y + 1, sum + matrix[x][y]);
-  };
-
-  for (let i = 0; i < matrix[0].length; i++) {
-    fall(matrix, 0, i, 0);
+  for (let i = 1; i < matrix.length; i++) {
+    for (let j = 0; j < matrix.length; j++) {
+      const previousRowElements = [];
+      if (j > 0) previousRowElements.push(matrix[i - 1][j - 1]);
+      previousRowElements.push(matrix[i - 1][j]);
+      if (j < matrix.length - 1) previousRowElements.push(matrix[i - 1][j + 1]);
+      matrix[i][j] += Math.min(...previousRowElements);
+    }
   }
 
-  return result;
+  const lastRow = matrix[matrix.length - 1];
+
+  return Math.min(...lastRow);
 };
 
 console.log(
