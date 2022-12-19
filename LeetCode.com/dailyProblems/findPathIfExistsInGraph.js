@@ -1,17 +1,4 @@
 /**
- * @param {number[][]} edges
- * @return {object}
- */
-const generateGraph = (edges) =>
-  edges.reduce((acc, [src, dst]) => {
-    if (!acc[src]) acc[src] = [];
-    if (!acc[dst]) acc[dst] = [];
-    acc[src].push(dst);
-    acc[dst].push(src);
-    return acc;
-  }, {});
-
-/**
  * @param {number} n
  * @param {number[][]} edges
  * @param {number} source
@@ -21,30 +8,31 @@ const generateGraph = (edges) =>
 const validPath = (n, edges, source, destination) => {
   if (!edges.length) return true;
 
-  let result = false;
-  const graph = generateGraph(edges);
-  const visitedNodes = [];
+  const graph = edges.reduce((acc, [src, dest]) => {
+    if (!acc.has(src)) acc.set(src, []);
+    if (!acc.has(dest)) acc.set(dest, []);
+    acc.get(src).push(dest);
+    acc.get(dest).push(src);
+    return acc;
+  }, new Map());
 
-  const traverse = (neighbours) => {
-    for (const neighbor of neighbours) {
-      if (neighbor === destination) return (result = true);
-      if (!visitedNodes.includes(graph[neighbor])) {
-        visitedNodes.push(graph[neighbor]);
-        traverse(graph[neighbor]);
-      }
+  const visitedNodes = new Set();
+
+  const depthFirstSearch = (node) => {
+    visitedNodes.add(node);
+    for (const neighbor of graph.get(node)) {
+      if (!visitedNodes.has(neighbor)) depthFirstSearch(neighbor);
     }
   };
 
-  traverse(graph[source]);
+  depthFirstSearch(source);
 
-  return result;
+  return visitedNodes.has(destination);
 };
 
 const grph = [
   [0, 1],
-  [0, 2],
-  [3, 5],
-  [5, 4],
-  [4, 3],
+  [1, 2],
+  [2, 0],
 ];
-console.log(validPath(6, grph, 0, 5));
+console.log(validPath(3, grph, 0, 2));
