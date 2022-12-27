@@ -6,22 +6,14 @@ using namespace std;
 class Solution {
  public:
   vector<int> plusOne(vector<int>& digits) {
-    int sum = 0;
-
-    for (int i = 0; i < digits.size(); i++) {
-      sum *= 10;
-      sum += digits.at(i);
-    }
-
-    vector<int> result;
-    sum += 1;
-
-    while (sum > 0) {
-      result.insert(result.begin(), (sum % 10));
-      sum /= 10;
-    }
-
-    return result;
+    int i = digits.size() - 1;
+    while (i >= 0 && digits[i] == 9) digits[i--] = 0;
+    if (i < 0) {
+      digits.push_back(0);
+      i++;
+    };
+    digits[i]++;
+    return digits;
   }
 };
 
