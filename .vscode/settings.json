@@ -5,6 +5,7 @@
     ".prettierrc": "json",
     "*.tsx": "typescriptreact",
     ".env.*": "dotenv",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "vector": "cpp"
   }
 }
