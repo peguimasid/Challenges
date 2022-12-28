@@ -1,23 +1,21 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Solution {
  public:
   bool areOccurrencesEqual(string s) {
-    int firstOcurrence = 1;
-    char first = s.at(0);
+    vector<int> frequencyCounter(26, 0);
 
-    for (int i = 1; i < s.length(); i++) {
-      if (s[i] == first) firstOcurrence++;
-    }
+    for (int i = 0; i < s.size(); i++) frequencyCounter[s[i] - 'a']++;
 
-    for (int i = 0; i < s.length(); i++) {
-      int currentOcurrence = 1;
-      for (int j = 0; j < s.length(); j++) {
-        if (i != j && s[i] == s[j]) currentOcurrence++;
-      }
-      if (currentOcurrence != firstOcurrence) return false;
+    int firstFrequency = frequencyCounter[s[0] - 'a'];
+
+    for (int i = 0; i < frequencyCounter.size(); i++) {
+      int currentFrequency = frequencyCounter[i];
+
+      if (firstFrequency != currentFrequency and currentFrequency != 0) return false;
     }
 
     return true;
