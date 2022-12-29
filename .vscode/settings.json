@@ -6,6 +6,7 @@
     "*.tsx": "typescriptreact",
     ".env.*": "dotenv",
     "ostream": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "iosfwd": "cpp"
   }
 }
