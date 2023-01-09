@@ -12,14 +12,14 @@ const preorderTraversal = (root) => {
   if (!root) return [];
 
   const result = [];
+  const stack = [root];
 
-  const traverse = (node) => {
-    result.push(node.val);
-    if (node?.left) traverse(node.left);
-    if (node?.right) traverse(node.right);
-  };
-
-  traverse(root);
+  while (stack.length) {
+    const currentNode = stack.pop();
+    result.push(currentNode.val);
+    if (currentNode?.right) stack.push(currentNode.right);
+    if (currentNode?.left) stack.push(currentNode.left);
+  }
 
   return result;
 };
