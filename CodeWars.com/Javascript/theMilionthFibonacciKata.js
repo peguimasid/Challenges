@@ -1,14 +1,13 @@
 function matrixPower(mat, exponent) {
-  if (exponent === 1) {
-    return mat;
-  }
+  if (exponent === 1) return mat;
   if (exponent % 2 === 0) {
-    const matSquared = matrixMultiply(mat, mat);
-    return matrixPower(matSquared, exponent / 2);
-  } else {
-    const matSquared = matrixMultiply(mat, mat);
-    return matrixMultiply(mat, matrixPower(matSquared, (exponent - 1) / 2));
+    return matrixPower(matrixMultiply(mat, mat), exponent / 2);
   }
+
+  return matrixMultiply(
+    mat,
+    matrixPower(matrixMultiply(mat, mat), (exponent - 1) / 2)
+  );
 }
 
 function matrixMultiply(a, b) {
@@ -24,10 +23,11 @@ function matrixMultiply(a, b) {
 
 function fib(n) {
   const isNegative = n < 0;
+
   if (isNegative) n *= -1;
-  if (n <= 1) {
-    return BigInt(n);
-  }
+
+  if (n <= 1) return BigInt(n);
+
   const mat = [
     [BigInt(1), BigInt(1)],
     [BigInt(1), BigInt(0)],
@@ -40,7 +40,7 @@ function fib(n) {
   return isNegative ? result[0][0] * BigInt(-1) : result[0][0];
 }
 
-console.log(fib(1851280));
+// console.log(fib(1851280));
 
 console.log(fib(-1));
 console.log(fib(-11));
