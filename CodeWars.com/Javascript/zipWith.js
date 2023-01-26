@@ -5,9 +5,9 @@
  * @return {number[]}
  */
 function zipWith(fn, a0, a1) {
-  if (a0.length <= a1.length)
-    return a0.map((item, index) => fn(item, a1[index]));
-  return a1.map((item, index) => fn(a0[index], item));
+  return Array(Math.min(a0.length, a1.length))
+    .fill()
+    .map((_, i) => fn(a0[i], a1[i]));
 }
 
 console.log(zipWith(Math.pow, [10, 10, 10, 10], [0, 1, 2, 3]));
