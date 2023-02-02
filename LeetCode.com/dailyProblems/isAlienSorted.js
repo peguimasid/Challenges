@@ -34,5 +34,5 @@ console.log(isAlienSorted(['word', 'world', 'row'], 'worldabcefghijkmnpqstuvxyz'
 
 console.log(isAlienSorted(['hello', 'hello'], 'abcdefghijklmnopqrstuvwxyz')); // true
 
-// console.log(isAlienSorted(['hello', 'leetcode'], 'hlabcdefgijkmnopqrstuvwxyz')); // true
-// console.log(isAlienSorted(['apple', 'app'], 'abcdefghijklmnopqrstuvwxyz')); //false
+console.log(isAlienSorted(['hello', 'leetcode'], 'hlabcdefgijkmnopqrstuvwxyz')); // true
+console.log(isAlienSorted(['apple', 'app'], 'abcdefghijklmnopqrstuvwxyz')); //false
