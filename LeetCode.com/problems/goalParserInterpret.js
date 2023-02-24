@@ -3,25 +3,7 @@
  * @return {string}
  */
 const interpret = (command) => {
-  let result = '';
-
-  let i = 0;
-
-  while (i < command.length) {
-    if (command[i] === '(' && command[i + 1] === ')') {
-      result += 'o';
-      i += 2;
-      continue;
-    }
-    if (command[i] === '(' && command[i + 1] !== ')') {
-      i += 1;
-      continue;
-    }
-    result += command[i];
-    i += command[i + 1] === ')' ? 2 : 1;
-  }
-
-  return result;
+  return command.split('()').join('o').replaceAll('(al)', 'al');
 };
 
 console.log(interpret('G()(al)')); // Goal
