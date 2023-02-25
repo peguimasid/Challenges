@@ -3,18 +3,20 @@
  * @return {number}
  */
 const maxProfit = (prices) => {
-  if (prices.length === 1) return 0;
+  let left = 0;
+  let right = 1;
+  let result = 0;
 
-  let middle = Math.floor(prices.length / 2);
+  while (right < prices.length) {
+    if (prices[left] < prices[right]) {
+      result = Math.max(result, prices[right] - prices[left]);
+    } else {
+      left = right;
+    }
+    right++;
+  }
 
-  const former = prices.slice(0, middle);
-  const latter = prices.slice(middle);
-
-  return Math.max(
-    maxProfit(former),
-    maxProfit(latter),
-    Math.max(...latter) - Math.min(...former)
-  );
+  return result;
 };
 
 console.log(maxProfit([7, 1, 5, 3, 6, 4]));
