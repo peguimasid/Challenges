@@ -24,5 +24,5 @@ const strStr = (haystack, needle) => {
 };
 
 console.log(strStr('sadbutsad', 'sad')); // 0
-console.log(strStr('idontknowwhattodo', 'know')); // 0
+console.log(strStr('idontknowwhattodo', 'know')); // 5
 console.log(strStr('leetcode', 'leeto')); // -1
