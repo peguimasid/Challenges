@@ -11,14 +11,13 @@ function TreeNode(val, left, right) {
 const sumNumbers = (root) => {
   let result = 0;
 
-  const traverse = (node, num = '') => {
-    console.log(node, num);
-    if (!node.left && !node.right) result += Number(num);
-    if (node.left) traverse(node.left, num + node.left.val);
-    if (node.right) traverse(node.right, num + node.right.val);
+  const traverse = (node, num) => {
+    if (!node.left && !node.right) result += num;
+    if (node.left) traverse(node.left, num * 10 + node.left.val);
+    if (node.right) traverse(node.right, num * 10 + node.right.val);
   };
 
-  if (root) traverse(root, String(root.val));
+  if (root) traverse(root, root.val);
 
   return result;
 };
