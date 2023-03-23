@@ -4,20 +4,14 @@
  */
 const printVertically = (s) => {
   const splitted = s.split(' ');
-  const biggestWordLength = Math.max(...splitted.map((s) => s.length));
+  const maxLength = Math.max(...splitted.map((s) => s.length));
 
-  const result = new Array(biggestWordLength).fill('');
-
-  let getIndex = 0;
-
-  while (splitted.some((word) => word[getIndex])) {
-    for (const word of splitted) {
-      result[getIndex] += word[getIndex] || ' ';
-    }
-    getIndex++;
-  }
-
-  return result.map((s) => s.trimEnd());
+  return [...Array(maxLength)].map((_, i) =>
+    splitted
+      .map((word) => word[i] || ' ')
+      .join('')
+      .trimEnd()
+  );
 };
 
 console.log(printVertically('HOW ARE YOU'));
