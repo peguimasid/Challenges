@@ -1,31 +1,16 @@
-const pairs = {
-  '(': ')',
-  '[': ']',
-  '{': '}',
-};
-
 /**
  * @param {string} s
  * @return {boolean}
  */
 const isValid = (s) => {
-  if (s.length % 2 !== 0) return false;
-  if (s[0] === ']' || s[0] === ')' || s[0] === '}') return false;
-  if (
-    s[s.length - 1] === '[' ||
-    s[s.length - 1] === '(' ||
-    s[s.length - 1] === '{'
-  )
-    return false;
-
   const stack = [];
 
   for (const char of s) {
-    if (char === '[' || char === '(' || char === '{') {
-      stack.push(char);
-      continue;
-    }
-    if (pairs[stack.pop()] !== char) return false;
+    const isNone = char !== '(' && char !== '[' && char !== '{';
+    if (char === '(') stack.push(')');
+    if (char === '[') stack.push(']');
+    if (char === '{') stack.push('}');
+    if (isNone && char !== stack.pop()) return false;
   }
 
   return stack.length === 0;
