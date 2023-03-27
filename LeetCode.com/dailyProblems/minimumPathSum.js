@@ -3,19 +3,24 @@
  * @return {number}
  */
 const minPathSum = (grid) => {
-  let result = Number.MAX_SAFE_INTEGER;
+  const n = grid.length;
+  const m = grid[0].length;
 
-  const traverse = (i, j, sum) => {
-    if (i === grid.length - 1 && j === grid[0].length - 1) {
-      result = Math.min(result, sum);
+  for (let i = 1; i < n; i++) {
+    grid[i][0] += grid[i - 1][0];
+  }
+
+  for (let i = 1; i < m; i++) {
+    grid[0][i] += grid[0][i - 1];
+  }
+
+  for (let i = 1; i < n; i++) {
+    for (let j = 1; j < m; j++) {
+      grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
     }
-    if (grid[i + 1] !== undefined) traverse(i + 1, j, sum + grid[i + 1][j]);
-    if (grid[i][j + 1] !== undefined) traverse(i, j + 1, sum + grid[i][j + 1]);
-  };
+  }
 
-  traverse(0, 0, grid[0][0]);
-
-  return result;
+  return grid[n - 1][m - 1];
 };
 
 // prettier-ignore
