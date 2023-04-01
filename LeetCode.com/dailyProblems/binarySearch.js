@@ -4,15 +4,17 @@
  * @return {number}
  */
 const search = (nums, target) => {
-  const helper = (start, end) => {
-    if (start > end) return -1;
-    const middle = Math.floor((end + start) / 2);
-    if (nums[middle] === target) return middle;
-    if (nums[middle] < target) return helper(middle + 1, end);
-    if (nums[middle] > target) return helper(start, middle - 1);
-  };
+  let left = 0;
+  let right = nums.length - 1;
 
-  return helper(0, nums.length - 1);
+  while (left <= right) {
+    const middle = Math.floor((left + right) / 2);
+    if (nums[middle] === target) return middle;
+    if (nums[middle] < target) left = middle + 1;
+    if (nums[middle] > target) right = middle - 1;
+  }
+
+  return -1;
 };
 
 console.log(search([-1, 0, 3, 5, 9, 12], 9)); // 4
