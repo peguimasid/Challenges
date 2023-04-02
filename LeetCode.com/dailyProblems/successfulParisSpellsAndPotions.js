@@ -5,12 +5,22 @@
  * @return {number[]}
  */
 const successfulPairs = (spells, potions, success) => {
-  return spells.reduce((acc, curr, index) => {
-    acc[index] += potions
-      .map((potionStrength) => potionStrength * curr)
-      .filter((potionStrength) => potionStrength >= success).length;
-    return acc;
-  }, new Array(spells.length).fill(0));
+  potions.sort((a, b) => a - b);
+  const result = [];
+
+  for (const spell of spells) {
+    const rel = success / spell;
+    let left = 0;
+    let right = potions.length - 1;
+    while (left <= right) {
+      const mid = Math.floor((left + right) / 2);
+      if (potions[mid] < rel) left = mid + 1;
+      if (potions[mid] >= rel) right = mid - 1;
+    }
+    result.push(potions.length - left);
+  }
+
+  return result;
 };
 
 console.log(successfulPairs([5, 1, 3], [1, 2, 3, 4, 5], 7));
