@@ -3,14 +3,13 @@
  * @return {string}
  */
 const removeStars = (s) => {
-  const stack = [];
-
-  for (const char of s) {
-    if (char === '*' && stack.length) stack.pop();
-    else stack.push(char);
-  }
-
-  return stack.join('');
+  return s
+    .split('')
+    .reduce((acc, curr) => {
+      curr === '*' ? acc.pop() : acc.push(curr);
+      return acc;
+    }, [])
+    .join('');
 };
 
 console.log(removeStars('leet**cod*e')); // lecoe
