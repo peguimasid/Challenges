@@ -3,15 +3,14 @@
  * @return {string}
  */
 const removeStars = (s) => {
-  let result = s;
+  const stack = [];
 
-  let index = result.indexOf('*');
-  while (index >= 0) {
-    result = result.slice(0, index - 1) + result.slice(index + 1);
-    index = result.indexOf('*');
+  for (const char of s) {
+    if (char === '*' && stack.length) stack.pop();
+    else stack.push(char);
   }
 
-  return result;
+  return stack.join('');
 };
 
 console.log(removeStars('leet**cod*e')); // lecoe
