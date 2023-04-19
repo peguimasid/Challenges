@@ -4,35 +4,6 @@ function TreeNode(val, left, right) {
   this.right = right === undefined ? null : right;
 }
 
-const zigZagCount = (node) => {
-  let result = 0;
-
-  let currNode = node;
-  let curr = 0;
-  while (currNode) {
-    currNode = currNode.left;
-    if (!currNode) break;
-    curr++;
-    currNode = currNode.right;
-    if (!currNode) break;
-    curr++;
-  }
-  currNode = node;
-  result = Math.max(curr, result);
-  curr = 0;
-  while (currNode) {
-    currNode = currNode.right;
-    if (!currNode) break;
-    curr++;
-    currNode = currNode.left;
-    if (!currNode) break;
-    curr++;
-  }
-  result = Math.max(curr, result);
-
-  return result;
-};
-
 /**
  * @param {TreeNode} root
  * @return {number}
@@ -40,14 +11,17 @@ const zigZagCount = (node) => {
 const longestZigZag = (root) => {
   let result = 0;
 
-  const traverse = (node) => {
-    if (!node) return;
-    result = Math.max(result, zigZagCount(node));
-    if (node?.left) traverse(node?.left);
-    if (node?.right) traverse(node?.right);
+  const traverse = (node, direction = 0) => {
+    if (!node) return -1;
+    const left = 1 + traverse(node.left, 0);
+    const right = 1 + traverse(node.right, 1);
+    result = Math.max(result, left, right);
+    return direction === 0 ? right : left;
   };
 
-  traverse(root);
+  const left = 1 + traverse(root.left, 0);
+  const right = 1 + traverse(root.right, 1);
+  result = Math.max(result, left, right);
 
   return result;
 };
