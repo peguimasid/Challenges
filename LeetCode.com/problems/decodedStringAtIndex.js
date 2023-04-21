@@ -1,21 +1,4 @@
-/**
- * @param {string} s
- * @return {string}
- */
-const decodeString = (s) => {
-  let aux = s;
-
-  let i = 0;
-  while (i < aux.length) {
-    if (/^[0-9]$/.test(aux[i])) {
-      aux = aux.slice(0, i).repeat(Number(aux[i])) + aux.slice(i + 1);
-      i = 0;
-    }
-    i++;
-  }
-
-  return aux;
-};
+const isNumber = (s) => !isNaN(s);
 
 /**
  * @param {string} s
@@ -23,9 +6,18 @@ const decodeString = (s) => {
  * @return {string}
  */
 const decodeAtIndex = (s, k) => {
-  if (k === 1) return s[0];
-  const decodedString = decodeString(s);
-  return decodedString[k - 1];
+  let size = 0;
+
+  // find the number of char the decoded string is gonna contains
+  for (const char of s) {
+    size = isNumber(char) ? size * Number(char) : size + 1;
+  }
+
+  for (let i = s.length - 1; i >= 0; i--) {
+    k = k % size;
+    if (k === 0 && !isNumber(s[i])) return s[i];
+    size = !isNumber(s[i]) ? size - 1 : Math.ceil(size / Number(s[i]));
+  }
 };
 console.log(decodeAtIndex('leet2code3', 10)); // "leetleetcodeleetleetcodeleetleetcode" => "o"
 console.log(decodeAtIndex('ha22', 5)); // "hahahaha" => h
