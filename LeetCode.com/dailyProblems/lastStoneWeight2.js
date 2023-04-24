@@ -5,7 +5,6 @@
 const lastStoneWeight = (stones) => {
   while (stones.length > 1) {
     stones.sort((a, b) => a - b);
-    console.log(stones);
     const last = stones.pop();
     const secondToLast = stones.pop();
     if (last !== secondToLast) stones.push(last - secondToLast);
