@@ -4,25 +4,18 @@
  * @return {number}
  */
 const calculateTax = (brackets, income) => {
-  let tax = [];
-
-  for (let i = 0; i < brackets.length; i++) {
-    if (i === 0) {
-      const [upper, percent] = brackets[i];
-      if (income > 0) tax.push([Math.min(upper, income), percent]);
-      income -= upper;
-    } else {
-      const [upper, percent] = brackets[i];
-      const [prevUpper] = brackets?.[i - 1];
-      if (income > 0) tax.push([Math.min(upper - prevUpper, income), percent]);
-      income -= upper - prevUpper;
-    }
-  }
-
-  return tax.reduce((acc, [val, percent]) => {
-    acc += val * (percent / 100);
-    return acc;
-  }, 0);
+  return brackets.reduce(
+    (acc, [amount, percent]) => {
+      if (income <= 0) return acc;
+      const curr = Math.min(income, amount - acc.prev);
+      const tax = curr * (percent / 100);
+      income -= curr;
+      acc.paid += tax;
+      acc.prev = amount;
+      return acc;
+    },
+    { paid: 0, prev: 0 }
+  ).paid;
 };
 
 // prettier-ignore
