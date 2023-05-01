@@ -3,9 +3,15 @@
  * @return {number}
  */
 const average = (salary) => {
-  const min = Math.min(...salary);
-  const max = Math.max(...salary);
-  const sum = salary.reduce((acc, curr) => acc + curr);
+  let min = Number.MAX_SAFE_INTEGER;
+  let max = Number.MIN_SAFE_INTEGER;
+  let sum = 0;
+
+  for (const curr of salary) {
+    sum += curr;
+    min = Math.min(min, curr);
+    max = Math.max(max, curr);
+  }
 
   return (sum - min - max) / (salary.length - 2);
 };
