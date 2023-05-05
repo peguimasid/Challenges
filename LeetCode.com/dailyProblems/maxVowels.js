@@ -1,16 +1,21 @@
+const isVowel = (char) => new Set(['a', 'e', 'i', 'o', 'u']).has(char);
+
 /**
  * @param {string} s
  * @param {number} k
  * @return {number}
  */
 const maxVowels = (s, k) => {
+  let curr = 0;
   let result = 0;
+  let left = 0;
+  let right = 0;
 
-  for (let i = 0; i < s.length - k + 1; i++) {
-    let curr = 0;
-    for (let j = i; j < i + k; j++) {
-      if ('aeiou'.indexOf(s[j]) > -1) curr++;
-    }
+  while (left < k) if (isVowel(s[left++])) curr++;
+  result = Math.max(result, curr);
+  while (right < s.length) {
+    if (isVowel(s[left++])) curr++;
+    if (isVowel(s[right++])) curr--;
     result = Math.max(result, curr);
   }
 
