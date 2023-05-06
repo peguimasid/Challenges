@@ -3,10 +3,7 @@
  * @return {string}
  */
 const disemvowel = (str) => {
-  return str
-    .split('')
-    .filter((char) => !'aeiou'.includes(char.toLowerCase()))
-    .join('');
+  return str.replace(/[aeiou]/gi, '');
 };
 
 //prettier-ignore
