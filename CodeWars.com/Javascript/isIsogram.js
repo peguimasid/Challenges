@@ -3,15 +3,7 @@
  * @return {boolean}
  */
 function isIsogram(str) {
-  return Object.values(
-    str
-      .toLowerCase()
-      .split('')
-      .reduce((acc, curr) => {
-        acc[curr] = (acc[curr] || 0) + 1;
-        return acc;
-      }, {})
-  ).every((i) => i === 1);
+  return new Set(str.toLowerCase()).size === str.length;
 }
 
 console.log(isIsogram('Dermatoglyphics')); // true
