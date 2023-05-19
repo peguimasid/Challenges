@@ -3,16 +3,11 @@
  * @return {string[]}
  */
 const towerBuilder = (nFloors) => {
-  const lastFloorChars = nFloors * 2 - 1;
-
   return Array(nFloors)
     .fill()
     .map((_, index) => {
-      const astNum = (index + 1) * 2 - 1;
-      const spaceNum = lastFloorChars - astNum;
-      return `${' '.repeat(spaceNum / 2)}${'*'.repeat(astNum)}${' '.repeat(
-        spaceNum / 2
-      )}`;
+      const spaces = ' '.repeat(nFloors - index - 1);
+      return `${spaces}${'*'.repeat(index * 2 + 1)}${spaces}`;
     });
 };
 
