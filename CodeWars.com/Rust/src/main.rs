@@ -1,10 +1,13 @@
 #![allow(non_snake_case)]
-#[path = "exercises/rgb_to_hex.rs"]
+#[path = "exercises/count_duplicates.rs"]
 mod my_mod;
 
 fn main() {
-  println!("{:?}", my_mod::rgb(0, 0, 0)); // '000000'
-  println!("{:?}", my_mod::rgb(0, 0, -20)); // '000000'
-  println!("{:?}", my_mod::rgb(300, 255, 255)); // 'FFFFFF'
-  println!("{:?}", my_mod::rgb(173, 255, 47)); // 'ADFF2F'
+  println!("{}", my_mod::count_duplicates("abcde")); // 0
+  println!("{}", my_mod::count_duplicates("aabbcde")); // 2
+  println!("{}", my_mod::count_duplicates("aabBcde")); // 2
+  println!("{}", my_mod::count_duplicates("indivisibility")); // 1
+  println!("{}", my_mod::count_duplicates("Indivisibilities")); // 2
+  println!("{}", my_mod::count_duplicates("aA11")); // 2
+  println!("{}", my_mod::count_duplicates("ABBA")); // 2
 }
