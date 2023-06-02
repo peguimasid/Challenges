@@ -5,18 +5,14 @@
  * @return {string}
  */
 const rgb = (r, g, b) => {
-  if (r > 255) r = 255;
-  if (r < 0) r = 0;
-  if (g > 255) g = 255;
-  if (g < 0) g = 0;
-  if (b > 255) b = 255;
-  if (b < 0) b = 0;
-
-  const redHex = r.toString(16).toUpperCase().padStart(2, '0');
-  const greenHex = g.toString(16).toUpperCase().padStart(2, '0');
-  const blueHex = b.toString(16).toUpperCase().padStart(2, '0');
-
-  return `${redHex}${greenHex}${blueHex}`;
+  return [r, g, b]
+    .map((color) => {
+      return Math.max(0, Math.min(255, color))
+        .toString(16)
+        .toUpperCase()
+        .padStart(2, '0');
+    })
+    .join('');
 };
 
 console.log(rgb(0, 0, 0)); // '000000'
