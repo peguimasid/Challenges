@@ -1,1 +1,0 @@
-/Users/guilhermomasid/Desktop/Desafios/CodeWars.com/Rust/target/debug/Rust: /Users/guilhermomasid/Desktop/Desafios/CodeWars.com/Rust/src/exercises/find_multiples_of_a_number.rs /Users/guilhermomasid/Desktop/Desafios/CodeWars.com/Rust/src/main.rs
