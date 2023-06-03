@@ -1,3 +1,6 @@
+#[path = "day1/main.rs"]
+mod lib;
+
 fn main() {
-  println!("Hello, world!");
+  println!("{}", lib::calorie_counting());
 }
