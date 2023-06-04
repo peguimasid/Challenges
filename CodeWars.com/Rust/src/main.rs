@@ -1,13 +1,12 @@
-#[path = "exercises/find_outlier.rs"]
-mod my_mod;
+#[path = "exercises/tribonacci_sequence.rs"]
+mod lib;
 
 fn main() {
-  let t1 = [2, 6, 8, -10, 3];
-  let t2 = [
-    206847684, 1056521, 7, 17, 1901, 21104421, 7, 1, 35521, 1, 7781,
-  ];
-  let t3 = [std::i32::MAX, 0, 1];
-  println!("{}", my_mod::find_outlier(&t1)); // 3
-  println!("{}", my_mod::find_outlier(&t2)); // 206847684
-  println!("{}", my_mod::find_outlier(&t3)); // 0
+  println!("{:?}", lib::tribonacci(&[0., 1., 1.], 10)); //  [0., 1., 1., 2., 4., 7., 13., 24., 44., 81.]
+  println!("{:?}", lib::tribonacci(&[1., 0., 0.], 10)); //  [1., 0., 0., 1., 1., 2., 4., 7., 13., 24.]
+  println!("{:?}", lib::tribonacci(&[0., 0., 0.], 10)); //  [0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
+  println!("{:?}", lib::tribonacci(&[1., 2., 3.], 10)); //  [1., 2., 3., 6., 11., 20., 37., 68., 125., 230.]
+  println!("{:?}", lib::tribonacci(&[3., 2., 1.], 10)); //  [3., 2., 1., 6., 9., 16., 31., 56., 103., 190.]
+  println!("{:?}", lib::tribonacci(&[1., 1., 1.], 1)); //  [1.]
+  println!("{:?}", lib::tribonacci(&[300., 200., 100.], 0)); //  []
 }
