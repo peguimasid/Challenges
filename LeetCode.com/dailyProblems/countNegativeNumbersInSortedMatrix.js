@@ -3,10 +3,13 @@
  * @return {number}
  */
 const countNegatives = (grid) => {
-  return grid.reduce(
-    (acc, curr) => (acc += curr.filter((num) => num < 0).length),
-    0
-  );
+  return grid.reduce((acc, curr) => {
+    const negativeIndex = curr.findIndex((num) => num < 0);
+    if (negativeIndex !== -1) {
+      acc += curr.length - negativeIndex;
+    }
+    return acc;
+  }, 0);
 };
 
 // prettier-ignore
