@@ -1,7 +1,8 @@
-#[path = "exercises/can_make_arithmetic_progression.rs"]
+#[path = "exercises/convert_string_to_camel_case.rs"]
 mod lib;
 
 fn main() {
-  println!("{:?}", lib::can_make_arithmetic_progression(vec![3, 5, 1])); // true
-  println!("{:?}", lib::can_make_arithmetic_progression(vec![1, 2, 4])); // false
+  println!("{:?}", lib::to_camel_case("the-stealth-warrior")); // "theStealthWarrior"
+  println!("{:?}", lib::to_camel_case("The_Stealth_Warrior")); // "TheStealthWarrior"
+  println!("{:?}", lib::to_camel_case("The_Stealth-Warrior")); // "TheStealthWarrior"
 }
