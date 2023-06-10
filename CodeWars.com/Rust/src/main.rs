@@ -1,8 +1,8 @@
-#[path = "exercises/convert_string_to_camel_case.rs"]
+#[path = "exercises/digital_root.rs"]
 mod lib;
 
 fn main() {
-  println!("{:?}", lib::to_camel_case("the-stealth-warrior")); // "theStealthWarrior"
-  println!("{:?}", lib::to_camel_case("The_Stealth_Warrior")); // "TheStealthWarrior"
-  println!("{:?}", lib::to_camel_case("The_Stealth-Warrior")); // "TheStealthWarrior"
+  println!("{:?}", lib::digital_root(16)); // 7
+  println!("{:?}", lib::digital_root(942)); // 6
+  println!("{:?}", lib::digital_root(132189)); // 6
 }
