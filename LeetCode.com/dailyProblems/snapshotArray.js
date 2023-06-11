@@ -3,9 +3,7 @@
  */
 class SnapshotArray {
   constructor(length) {
-    this.values = new Map();
-    this.maxSize = length;
-    this.snapshots = new Map();
+    this.snapshots = {};
     this.snap_id = 0;
   }
   /**
@@ -14,14 +12,16 @@ class SnapshotArray {
    * @return {void}
    */
   set(index, val) {
-    if (index < 0 || index >= this.maxSize) return;
-    this.values.set(index, val);
+    if (!this.snapshots[this.snap_id]) {
+      this.snapshots[this.snap_id] = [];
+    }
+
+    this.snapshots[this.snap_id][index] = val;
   }
   /**
    * @return {number}
    */
   snap() {
-    this.snapshots.set(this.snap_id, new Map(this.values));
     return this.snap_id++;
   }
   /**
@@ -30,9 +30,13 @@ class SnapshotArray {
    * @return {number}
    */
   get(index, snap_id) {
-    if (!this.snapshots.has(snap_id)) return null;
+    for (let i = snap_id; i >= 0; i--) {
+      if (this.snapshots?.[i]?.[index] !== undefined) {
+        return this.snapshots[i][index];
+      }
+    }
 
-    return this.snapshots.get(snap_id).get(index) || 0;
+    return 0;
   }
 }
 
