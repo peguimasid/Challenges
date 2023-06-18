@@ -4,21 +4,12 @@
  * @returns
  */
 const cakes = (recipe, available) => {
-  const initialValue = Object.entries(recipe).reduce((acc, [key]) => {
-    acc[key] = 0;
-    return acc;
-  }, {});
-
-  const recipeIngredientsAmount = Object.entries(recipe).reduce(
-    (acc, [ingredient, amount]) => {
-      if (!available[ingredient]) return acc;
-      acc[ingredient] = Math.floor(available[ingredient] / amount);
-      return acc;
-    },
-    initialValue
-  );
-
-  return Math.min(...Object.values(recipeIngredientsAmount));
+  return Object.keys(recipe).reduce((acc, ingredient) => {
+    return Math.min(
+      acc,
+      Math.floor(available[ingredient] / recipe[ingredient] || 0)
+    );
+  }, Number.MAX_SAFE_INTEGER);
 };
 
 let recipe = { flour: 500, sugar: 200, eggs: 1 };
