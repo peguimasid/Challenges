@@ -1,13 +1,23 @@
 /**
+ * @param {number} num
+ * @return {object}
+ */
+const getFrequency = (num) => {
+  const freq = {};
+  while (num > 0) {
+    freq[num % 10] = (freq[num % 10] || 0) + 1;
+    num = Math.floor(num / 10);
+  }
+  return freq;
+};
+
+/**
  * @param {object} original
- * @param {string} string
+ * @param {number} num
  * @return {boolean}
  */
-const hasSameFrequency = (original, string) => {
-  const freq = string.split('').reduce((acc, curr) => {
-    acc[curr] = (acc[curr] || 0) + 1;
-    return acc;
-  }, {});
+const hasSameFrequency = (original, num) => {
+  const freq = getFrequency(num);
 
   for (const key in freq) {
     if (original[key] != freq[key]) return false;
@@ -21,16 +31,10 @@ const hasSameFrequency = (original, string) => {
  * @return {number}
  */
 const nextBigger = (n) => {
-  const freq = String(n)
-    .split('')
-    .reduce((acc, curr) => {
-      acc[curr] = (acc[curr] || 0) + 1;
-      return acc;
-    }, {});
+  const freq = getFrequency(n);
 
   for (let i = n + 1; i < n * 10; i++) {
-    const numStr = String(i);
-    if (hasSameFrequency(freq, numStr)) {
+    if (hasSameFrequency(freq, i)) {
       return i;
     }
   }
