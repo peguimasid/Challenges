@@ -1,19 +1,17 @@
 function sumPairs(ints, s) {
-  const solutions = [];
+  const encountered = {};
 
-  for (let i = 0; i < ints.length - 1; i++) {
-    for (let j = i + 1; j < ints.length; j++) {
-      if (ints[i] + ints[j] === s) solutions.push([i, j]);
+  for (const num of ints) {
+    const difference = s - num;
+
+    if (encountered[difference]) {
+      return [difference, num];
     }
+
+    encountered[num] = true;
   }
 
-  if (!solutions?.length) return undefined;
-
-  const [first] = solutions.sort(([, b1], [, b2]) => b1 - b2);
-
-  const [i, j] = first;
-
-  return [ints[i], ints[j]];
+  return undefined;
 }
 
 console.log(sumPairs([11, 3, 7, 5], 10)); // [3, 7]
