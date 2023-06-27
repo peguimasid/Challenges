@@ -3,11 +3,8 @@
  * @return {number}
  */
 const fib = (n) => {
-  return Math.floor(
-    (Math.pow((1 + Math.sqrt(5)) / 2, n) -
-      Math.pow((1 - Math.sqrt(5)) / 2, n)) /
-      Math.sqrt(5)
-  );
+  // prettier-ignore
+  return Math.floor((Math.pow((1 + Math.sqrt(5)) / 2, n) - Math.pow((1 - Math.sqrt(5)) / 2, n)) / Math.sqrt(5));
 };
 
 console.log(fib(2)); // 1
