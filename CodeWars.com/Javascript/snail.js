@@ -14,6 +14,8 @@ const snail = (array) => {
   return result;
 };
 
+// test to see if the main branch updated correctly
+
 console.log(
   snail([
     [1, 2, 3, 4, 5, 6],
