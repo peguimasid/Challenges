@@ -3,30 +3,23 @@
  * @return {object}
  */
 const convertQueryToMap = (query) => {
-  if (!query) return {};
-  return query.split('&').reduce((acc, curr) => {
+  return query.split('&').reduce((map, curr) => {
     const [keyPath, value] = curr.split('=').map(decodeURIComponent);
 
-    let keyMap = acc;
+    if (!value) return map;
 
-    const keyPathSplitted = keyPath.split('.');
+    const keysSplitted = keyPath.split('.');
+    const lastKey = keysSplitted.pop();
+    const innerObject = keysSplitted.reduce((obj, key) => {
+      return obj[key] || (obj[key] = {});
+    }, map);
 
-    for (let i = 0; i < keyPathSplitted.length; i++) {
-      const key = keyPathSplitted[i];
-      const isLast = i === keyPathSplitted.length - 1;
-      if (!isLast) {
-        if (!keyMap[key]) keyMap[key] = {};
-        keyMap = keyMap[key];
-      }
-      if (isLast) keyMap[key] = value;
-    }
+    innerObject[lastKey] = value;
 
-    return acc;
+    return map;
   }, {});
 };
 
-console.log(
-  convertQueryToMap(
-    'user.name.firstname=Bob&user.name.lastname=Smith&user.favoritecolor=Light%20Blue'
-  )
-);
+console.log(convertQueryToMap(''));
+// prettier-ignore
+console.log(convertQueryToMap('user.name.firstname=Bob&user.name.lastname=Smith&user.favoritecolor=Light%20Blue'));
