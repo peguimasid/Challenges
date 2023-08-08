@@ -15,9 +15,7 @@ function minDistance(n) {
     const prev = factors[i - 1];
     const curr = factors[i];
 
-    if (curr - prev < result) {
-      result = curr - prev;
-    }
+    result = Math.min(result, curr - prev);
   }
 
   return result;
