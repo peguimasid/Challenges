@@ -9,12 +9,13 @@ function TreeNode(val, left, right) {
  * @return {number[]}
  */
 function inorderTraversal(root) {
-  const accumulate = (node) => {
-    if (!node) return [];
-    return [...accumulate(node?.left), node.val, ...accumulate(node?.right)];
-  };
+  if (!root) return [];
 
-  return accumulate(root);
+  return [
+    ...inorderTraversal(root?.left),
+    root.val,
+    ...inorderTraversal(root?.right),
+  ];
 }
 
 const tree = new TreeNode(
