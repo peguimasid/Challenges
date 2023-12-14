@@ -8,7 +8,38 @@
  * @param {number[][]} grid
  * @return {number[][]}
  */
-function onesMinusZeros(grid) {}
+function onesMinusZeros(grid) {
+  const zerosInRow = {};
+  const onesInRow = {};
+  const zerosInCol = {};
+  const onesInCol = {};
+
+  for (const x in grid) {
+    if (!zerosInRow[x]) zerosInRow[x] = 0;
+    if (!onesInRow[x]) onesInRow[x] = 0;
+    for (const y in grid[x]) {
+      if (!zerosInCol[y]) zerosInCol[y] = 0;
+      if (!onesInCol[y]) onesInCol[y] = 0;
+
+      if (grid[x][y] === 0) {
+        zerosInRow[x]++;
+        zerosInCol[y]++;
+      }
+      if (grid[x][y] === 1) {
+        onesInRow[x]++;
+        onesInCol[y]++;
+      }
+    }
+  }
+
+  for (const x in grid) {
+    for (const y in grid[x]) {
+      grid[x][y] = onesInRow[x] + onesInCol[y] - zerosInRow[x] - zerosInCol[y];
+    }
+  }
+
+  return grid;
+}
 
 const mat = [
   [0, 1, 1],
