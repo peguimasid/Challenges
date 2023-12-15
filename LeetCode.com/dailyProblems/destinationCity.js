@@ -3,22 +3,17 @@
  * @return {string}
  */
 function destCity(paths) {
-  const pathsGraph = paths.reduce((acc, curr) => {
-    const [startCity, endCity] = curr;
-    acc[startCity] = [...(acc[startCity] || []), endCity];
-    return acc;
-  }, {});
+  const cities = new Set();
 
-  const findDestination = (city) => {
-    if (!pathsGraph[city]) return city;
-    const neighbors = pathsGraph[city];
+  for (const [origin] of paths) {
+    cities.add(origin);
+  }
 
-    for (const neighbor of neighbors) {
-      return findDestination(neighbor);
-    }
-  };
+  for (const [, destination] of paths) {
+    if (!cities.has(destination)) return destination;
+  }
 
-  return findDestination(paths[0][0]);
+  return '';
 }
 
 const p1 = [
