@@ -4,14 +4,23 @@
  * @return {number}
  */
 function buyChoco(prices, money) {
-  prices.sort((a, b) => a - b);
+  let min1 = Number.MAX_SAFE_INTEGER;
+  let min2 = Number.MAX_SAFE_INTEGER;
 
-  for (let i = 0; i < prices.length - 1; i++) {
-    const finalPrice = prices[i] + prices[i + 1];
-    if (finalPrice <= money) return money - finalPrice;
+  for (const price of prices) {
+    if (price < min1) {
+      min2 = min1;
+      min1 = price;
+    } else if (price < min2) {
+      min2 = price;
+    }
   }
 
-  return money;
+  const finalPrice = min1 + min2;
+
+  if (finalPrice > money) return money;
+
+  return money - finalPrice;
 }
 
 console.log(buyChoco([1, 2, 2], 3)); // 0
