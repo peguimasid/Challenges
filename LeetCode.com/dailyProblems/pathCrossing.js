@@ -23,9 +23,9 @@ function isPathCrossing(path) {
 
     if (visited.has(key)) {
       return true;
-    } else {
-      visited.add(key);
     }
+
+    visited.add(key);
   }
 
   return false;
