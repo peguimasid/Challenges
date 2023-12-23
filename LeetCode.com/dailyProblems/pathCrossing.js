@@ -6,7 +6,9 @@
  * @return {boolean}
  */
 function isPathCrossing(path) {
-  const visited = ['0,0'];
+  const visited = new Set();
+
+  visited.add('0,0');
 
   let x = 0;
   let y = 0;
@@ -16,12 +18,13 @@ function isPathCrossing(path) {
     if (dir === 'S') y--;
     if (dir === 'E') x++;
     if (dir === 'W') x--;
+
     const key = `${x},${y}`;
 
-    if (visited.includes(key)) {
+    if (visited.has(key)) {
       return true;
     } else {
-      visited.push(key);
+      visited.add(key);
     }
   }
 
