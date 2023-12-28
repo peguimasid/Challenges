@@ -4,7 +4,15 @@
  * @return {number}
  */
 function getLengthOfOptimalCompression(s, k) {
+  const cache = {};
+
   function count(i, k, prevChar, prevCharCount) {
+    const key = `${i},${k},${prevChar},${prevCharCount}`;
+
+    if (cache[key]) {
+      return cache[key];
+    }
+
     if (k < 0) {
       return Number.MAX_SAFE_INTEGER;
     }
@@ -24,6 +32,8 @@ function getLengthOfOptimalCompression(s, k) {
         1 + count(i + 1, k, s[i], 1) // Don't delete s[i];
       );
     }
+
+    cache[key] = result;
 
     return result;
   }
