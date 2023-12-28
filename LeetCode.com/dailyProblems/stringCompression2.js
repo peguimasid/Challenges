@@ -17,7 +17,7 @@ function getLengthOfOptimalCompression(s, k) {
       return Number.MAX_SAFE_INTEGER;
     }
 
-    if (i === s.length) {
+    if (s.length - i === k) {
       return 0;
     }
 
