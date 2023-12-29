@@ -5,7 +5,13 @@
  * @return {number}
  */
 function reduce(nums, fn, init) {
-  return nums.reduce(fn, init);
+  let result = init;
+
+  for (const num of nums) {
+    result = fn(result, num);
+  }
+
+  return result;
 }
 
 function sum1(acc, curr) {
