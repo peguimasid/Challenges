@@ -3,12 +3,24 @@
  * @return {boolean}
  */
 function makeEqual(words) {
-  const frequency = words.reduce((acc, word) => {
-    word.split('').forEach((char) => (acc[char] = (acc[char] || 0) + 1));
-    return acc;
-  }, {});
+  if (words.length === 1) {
+    return true;
+  }
 
-  return Object.values(frequency).every((val) => val % words.length === 0);
+  const totalCharsCount = words.reduce((acc, curr) => acc + curr.length, 0);
+
+  if (totalCharsCount % words.length !== 0) {
+    return false;
+  }
+
+  const frequency = words.reduce((acc, word) => {
+    for (const char of word) {
+      acc[char.charCodeAt() - 97]++;
+    }
+    return acc;
+  }, new Array(26).fill(0));
+
+  return frequency.every((val) => val % words.length === 0);
 }
 
 console.log(makeEqual(['abc', 'aabc', 'bc'])); // true
