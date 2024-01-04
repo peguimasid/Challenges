@@ -3,21 +3,16 @@
  * @return {number}
  */
 function minOperations(nums) {
-  const frequency = nums.reduce((acc, curr) => {
-    acc[curr] = (acc[curr] || 0) + 1;
-    return acc;
-  }, {});
-
-  const values = Object.values(frequency);
-
-  if (values.some((val) => val === 1)) {
-    return -1;
-  }
+  const frequency = nums.reduce((map, num) => {
+    map.set(num, (map.get(num) || 0) + 1);
+    return map;
+  }, new Map());
 
   let result = 0;
 
-  for (const value of values) {
-    result += Math.floor(value / 3) + Math.ceil((value % 3) / 2);
+  for (const freq of frequency.values()) {
+    if (freq === 1) return -1;
+    result += Math.floor(freq / 3) + Math.ceil((freq % 3) / 2);
   }
 
   return result;
