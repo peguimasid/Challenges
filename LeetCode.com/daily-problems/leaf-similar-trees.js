@@ -20,15 +20,7 @@ function leafSimilar(root1, root2) {
   const leafNodes1 = getLeafNodes(root1);
   const leafNodes2 = getLeafNodes(root2);
 
-  if (leafNodes1.length !== leafNodes2.length) {
-    return false;
-  }
-
-  for (let i = 0; i < leafNodes1.length; i++) {
-    if (leafNodes1[i] !== leafNodes2[i]) return false;
-  }
-
-  return true;
+  return leafNodes1.join(',') === leafNodes2.join(',');
 }
 
 const root1 = new TreeNode(3);
