@@ -8,22 +8,22 @@ function closeStrings(word1, word2) {
     return false;
   }
 
-  const word1Chars = [...new Set(word1)];
-  const word2Chars = [...new Set(word2)];
-
-  if (word1Chars.sort().join('') !== word2Chars.sort().join('')) {
-    return false;
-  }
-
   const word1Frequency = new Array(26).fill(0);
   const word2Frequency = new Array(26).fill(0);
 
   for (const char of word1) {
-    word1Frequency[char.charCodeAt() - 97]++;
+    const charIndex = char.charCodeAt() - 97;
+    word1Frequency[charIndex]++;
   }
 
   for (const char of word2) {
-    word2Frequency[char.charCodeAt() - 97]++;
+    const charIndex = char.charCodeAt() - 97;
+
+    if (word1Frequency[charIndex] === 0) {
+      return false;
+    }
+
+    word2Frequency[charIndex]++;
   }
 
   const sortedW1 = word1Frequency.sort((a, b) => a - b).join('');
