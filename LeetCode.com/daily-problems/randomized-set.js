@@ -1,17 +1,15 @@
 class RandomizedSet {
   constructor() {
-    this.set = {};
-    this.size = 0;
+    this.set = new Set();
   }
   /**
    * @param {number} val
    * @return {boolean}
    */
   insert(val) {
-    if (this.set[val]) return false;
+    if (this.set.has(val)) return false;
 
-    this.set[val] = true;
-    this.size++;
+    this.set.add(val);
 
     return true;
   }
@@ -21,10 +19,9 @@ class RandomizedSet {
    * @return {boolean}
    */
   remove(val) {
-    if (!this.set[val]) return false;
+    if (!this.set.has(val)) return false;
 
-    delete this.set[val];
-    this.size--;
+    this.set.delete(val);
 
     return true;
   }
@@ -33,7 +30,7 @@ class RandomizedSet {
    * @return {number}
    */
   getRandom() {
-    return Object.keys(this.set)[Math.floor(Math.random() * this.size)];
+    return [...this.set.values()][Math.floor(Math.random() * this.set.size)];
   }
 }
 
