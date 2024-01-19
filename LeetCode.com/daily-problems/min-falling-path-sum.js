@@ -4,28 +4,25 @@
  */
 function minFallingPathSum(matrix) {
   const n = matrix.length;
-
-  let result = Number.MAX_SAFE_INTEGER;
-
-  function fall(row, col, sum) {
-    if (row === n - 1) {
-      result = Math.min(result, sum + matrix[row][col]);
-    }
-
-    const nextCols = [-1, 0, 1];
-
-    for (const nextCol of nextCols) {
-      if (matrix?.[row + 1]?.[col + nextCol]) {
-        fall(row + 1, col + nextCol, sum + matrix[row][col]);
-      }
-    }
-  }
+  const dp = new Array(n)
+    .fill(null)
+    .map(() => new Array(n).fill(null).map(() => 0));
 
   for (let i = 0; i < n; i++) {
-    fall(0, i, 0);
+    dp[0][i] = matrix[0][i];
   }
 
-  return result;
+  for (let row = 1; row < n; row++) {
+    for (let col = 0; col < n; col++) {
+      dp[row][col] = Math.min(
+        matrix[row][col] + (dp[row - 1][col - 1] ?? Number.MAX_SAFE_INTEGER),
+        matrix[row][col] + (dp[row - 1][col] ?? Number.MAX_SAFE_INTEGER),
+        matrix[row][col] + (dp[row - 1][col + 1] ?? Number.MAX_SAFE_INTEGER)
+      );
+    }
+  }
+
+  return Math.min(...dp.pop());
 }
 
 const mat1 = [
