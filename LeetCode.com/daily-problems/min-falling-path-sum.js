@@ -4,9 +4,7 @@
  */
 function minFallingPathSum(matrix) {
   const n = matrix.length;
-  const dp = new Array(n)
-    .fill(null)
-    .map(() => new Array(n).fill(null).map(() => 0));
+  const dp = new Array(n).fill(null).map(() => new Array(n).fill(0));
 
   for (let i = 0; i < n; i++) {
     dp[0][i] = matrix[0][i];
