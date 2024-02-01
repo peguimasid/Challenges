@@ -4,14 +4,15 @@
  * @return {number[][]}
  */
 function divideArray(nums, k) {
-  nums.sort((a, b) => a - b);
-
-  const sub = new Array(Math.floor(nums.length / 3)).fill(null).map(() => []);
-
-  for (let i = 0; i < nums.length; i++) {
-    const index = Math.floor(i / 3);
-    sub[index].push(nums[i]);
-  }
+  const sub = nums
+    .toSorted((a, b) => a - b)
+    .reduce(
+      (acc, curr, index) => {
+        acc[Math.floor(index / 3)].push(curr);
+        return acc;
+      },
+      new Array(Math.floor(nums.length / 3)).fill(null).map(() => [])
+    );
 
   for (const array of sub) {
     if (array[array.length - 1] - array[0] > k) return [];
