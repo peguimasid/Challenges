@@ -4,24 +4,18 @@
  * @return {number[]}
  */
 function sequentialDigits(low, high) {
-  const string = '123456789';
-
-  const startDigits = String(low).length;
-  const endDigits = String(high).length;
-
   const result = [];
 
-  for (let i = startDigits; i <= endDigits; i++) {
-    for (let j = 0; j < string.length - i + 1; j++) {
-      const num = Number(string.slice(j, i + j));
-      if (num > high) return result;
-      if (num >= low) {
-        result.push(num);
-      }
+  for (let i = 1; i <= 9; i++) {
+    let num = i;
+
+    for (let j = i + 1; j <= 9; j++) {
+      num = num * 10 + j;
+      if (num >= low && num <= high) result.push(num);
     }
   }
 
-  return result;
+  return result.sort((a, b) => a - b);
 }
 
 console.log(sequentialDigits(100, 300)); // [123, 234]
