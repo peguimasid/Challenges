@@ -6,12 +6,10 @@ function groupAnagrams(strs) {
   const map = new Map();
 
   for (const str of strs) {
-    const frequency = str.split('').reduce((acc, curr) => {
-      acc[curr] = (acc[curr] || 0) + 1;
-      return acc;
-    }, {});
-
-    const key = Object.entries(frequency).sort().join(',');
+    const key = str
+      .split('')
+      .toSorted((a, b) => a.localeCompare(b))
+      .join('');
 
     if (!map.has(key)) map.set(key, []);
 
