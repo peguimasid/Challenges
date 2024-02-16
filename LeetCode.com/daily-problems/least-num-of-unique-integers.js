@@ -14,12 +14,10 @@ function findLeastNumOfUniqueInts(arr, k) {
   let completelyRemoved = 0;
 
   for (const frequency of values) {
-    if (k <= 0) break;
-    if (k < frequency) break;
-    if (k >= frequency) {
-      completelyRemoved++;
-      k -= frequency;
-    }
+    if (k <= 0 || k < frequency) break;
+
+    completelyRemoved++;
+    k -= frequency;
   }
 
   return values.length - completelyRemoved;
