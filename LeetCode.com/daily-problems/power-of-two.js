@@ -3,11 +3,9 @@
  * @return {boolean}
  */
 function isPowerOfTwo(n) {
-  for (let i = 0; i < n / 2 + 1; i++) {
-    if (2 ** i === n) return true;
-  }
+  if (n < 1) return false;
 
-  return false;
+  return (n & (n - 1)) === 0;
 }
 
 console.log(isPowerOfTwo(1)); // true
