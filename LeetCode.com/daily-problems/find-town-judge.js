@@ -6,22 +6,15 @@
 function findJudge(n, trust) {
   if (n === 1) return 1;
 
-  const graph = {};
+  const trusted = new Array(n + 1).fill(0);
 
   for (const [trustGiver, trustReceiver] of trust) {
-    if (!graph[trustGiver]) graph[trustGiver] = [];
-    if (!graph[trustReceiver]) graph[trustReceiver] = [];
-
-    graph[trustGiver].push(trustReceiver);
+    trusted[trustGiver]--;
+    trusted[trustReceiver]++;
   }
 
-  for (const key in graph) {
-    const personTrustNobody = graph[key].length === 0;
-    const everybodyTrustPerson = Object.entries(graph)
-      .filter(([k]) => k !== key)
-      .every((t) => t[1].includes(Number(key)));
-
-    if (personTrustNobody && everybodyTrustPerson) return key;
+  for (let i = 0; i <= n; i++) {
+    if (trusted[i] === n - 1) return i;
   }
 
   return -1;
