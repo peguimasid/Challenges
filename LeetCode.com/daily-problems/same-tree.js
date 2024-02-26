@@ -10,21 +10,10 @@ function TreeNode(val, left, right) {
  * @return {boolean}
  */
 function isSameTree(p, q) {
-  const pNodes = [];
-  const qNodes = [];
-
-  function traverse(node, arr) {
-    arr.push(node?.val ?? null);
-    if (node?.left || node?.right) {
-      traverse(node?.left, arr);
-      traverse(node?.right, arr);
-    }
-  }
-
-  traverse(p, pNodes);
-  traverse(q, qNodes);
-
-  return pNodes.join(',') === qNodes.join(',');
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 }
 
 const t1 = new TreeNode(1, new TreeNode(2), new TreeNode(3));
