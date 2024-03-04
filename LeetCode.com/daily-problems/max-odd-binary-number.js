@@ -3,15 +3,12 @@
  * @return {string}
  */
 function maximumOddBinaryNumber(s) {
-  let zeroesCount = 0;
-  let onesCount = 0;
-
-  for (const char of s) {
-    if (char === '0') zeroesCount++;
-    if (char === '1') onesCount++;
-  }
-
-  return '1'.repeat(onesCount - 1) + '0'.repeat(zeroesCount) + '1';
+  return s
+    .split('')
+    .toSorted((a, b) => b - a)
+    .slice(1)
+    .concat('1')
+    .join('');
 }
 
 console.log(maximumOddBinaryNumber('010')); // "001"
