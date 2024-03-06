@@ -8,10 +8,13 @@ function ListNode(val) {
  * @return {boolean}
  */
 function hasCycle(head) {
-  while (head) {
-    if (head.visited) return true;
-    head.visited = true;
-    head = head.next;
+  let fast = head;
+  let slow = head;
+
+  while (fast?.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
 
   return false;
