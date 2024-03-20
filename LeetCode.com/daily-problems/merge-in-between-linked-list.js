@@ -11,12 +11,22 @@ function ListNode(val, next) {
  * @return {ListNode}
  */
 function mergeInBetween(list1, a, b, list2) {
-  // store the head in temp variable
-  // while count < a -> temp = temp.next
-  // temp.next = list2
-  // while count <= b -> temp = temp.next
-  // go to the end of list2
-  // list2.next = temp
+  let temp = list1;
+  let count = 0;
+
+  let pointer1 = null;
+  let pointer2 = null;
+
+  while (++count < a) temp = temp.next;
+  pointer1 = temp;
+  while (count++ <= b + 1) temp = temp.next;
+  pointer2 = temp;
+
+  pointer1.next = list2;
+  while (list2.next) list2 = list2.next;
+  list2.next = pointer2;
+
+  return list1;
 }
 
 // prettier-ignore
