@@ -8,15 +8,32 @@ function ListNode(val, next) {
  * @return {boolean}
  */
 function isPalindrome(head) {
-  // https://leetcode.com/problems/palindrome-linked-list/?envType=daily-question&envId=2024-03-22
-  // its actually an easy problem if you transform the linked list to an array or string
-  // i'll try to solve in O(n) time and O(1) space
-  //
-  // My solution using string:
-  // https://github.com/peguimasid/Challenges/blob/843858aa24075c4eac52193f084f47d8232e37c7/LeetCode.com/dailyProblems/isPalindromeLinkedList.js
+  if (!head?.next) return null;
+
+  let slow = head;
+  let fast = head;
+  let prev = null;
+
+  while (fast?.next) {
+    [fast, slow.next, prev, slow] = [fast.next.next, prev, slow, slow.next];
+  }
+
+  if (fast) slow = slow.next;
+
+  while (prev && slow) {
+    if (prev.val !== slow.val) return false;
+    [prev, slow] = [prev.next, slow.next];
+  }
+
+  return true;
 }
 
 // prettier-ignore
 console.log(isPalindrome(new ListNode(1, new ListNode(2, new ListNode(2, new ListNode(1)))))); // true
+// [1,2,2,1]
+// [1,2,1,2]
+
 // prettier-ignore
 console.log(isPalindrome(new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(2, new ListNode(1))))))); // true
+// [1,2,3,2,1]
+// [1,2,3,1,2,3]
