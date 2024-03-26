@@ -3,23 +3,9 @@
  * @return {number}
  */
 function firstMissingPositive(nums) {
-  const sorted = nums.toSorted((a, b) => a - b);
-
-  let mustBe = 1;
-  for (let i = 0; i < sorted.length; i++) {
-    const num = sorted[i];
-    const next = sorted[i + 1];
-    if (num > 0) {
-      if (num !== mustBe) {
-        return mustBe;
-      }
-      if (next !== num) {
-        mustBe++;
-      }
-    }
-  }
-
-  return mustBe;
+  return nums
+    .toSorted((a, b) => a - b)
+    .reduce((acc, curr) => (acc += curr === acc ? 1 : 0), 1);
 }
 
 console.log(firstMissingPositive([1, 2, 0])); // 3
