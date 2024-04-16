@@ -12,21 +12,16 @@ function TreeNode(val, left, right) {
  */
 function addOneRow(root, val, depth) {
   if (depth === 1) {
-    let temp = new TreeNode(val);
-    temp.left = root;
-    root = temp;
-    return root;
+    return new TreeNode(val, root);
   }
 
-  function traverse(node, level) {
-    if (level + 1 === depth) {
-      let temp = node.left;
-      node.left = new TreeNode(val, temp);
-      temp = node.right;
-      node.right = new TreeNode(val, null, temp);
+  function traverse(node, d) {
+    if (d === depth - 1) {
+      node.left = new TreeNode(val, node.left);
+      node.right = new TreeNode(val, null, node.right);
     }
-    if (node.left) traverse(node.left, level + 1);
-    if (node.right) traverse(node.right, level + 1);
+    if (node.left) traverse(node.left, d + 1);
+    if (node.right) traverse(node.right, d + 1);
   }
 
   traverse(root, 1);
