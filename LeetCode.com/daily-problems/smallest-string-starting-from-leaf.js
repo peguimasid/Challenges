@@ -9,19 +9,23 @@ function TreeNode(val, left, right) {
  * @return {string}
  */
 function smallestFromLeaf(root) {
-  const strs = [];
+  let result = '';
 
   function traverse(node, str = '') {
     const char = String.fromCharCode(node.val + 97);
 
-    if (!node.left && !node.right) strs.push(char + str);
+    if (!node.left && !node.right) {
+      if (!result || char + str < result) {
+        result = char + str;
+      }
+    }
     if (node.left) traverse(node.left, char + str);
     if (node.right) traverse(node.right, char + str);
   }
 
   traverse(root);
 
-  return strs.toSorted((a, b) => a.localeCompare(b))[0];
+  return result;
 }
 
 const bt = new TreeNode(0);
