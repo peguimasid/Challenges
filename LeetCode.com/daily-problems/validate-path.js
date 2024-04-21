@@ -6,37 +6,25 @@
  * @return {boolean}
  */
 function validPath(n, edges, source, destination) {
-  if (source === destination) return true;
+  if (n === 1) return true;
 
-  const adjacencyList = edges.reduce((acc, [src, dest]) => {
-    if (!acc.has(src)) acc.set(src, []);
-    if (!acc.has(dest)) acc.set(dest, []);
+  const visited = new Array(n).fill(false);
+  visited[source] = true;
+  let shouldRun = true;
 
-    acc.set(src, [...acc.get(src), dest]);
-    acc.set(dest, [...acc.get(dest), src]);
-    return acc;
-  }, new Map());
-
-  const visited = new Set();
-  let result = false;
-
-  function findPath(src) {
-    if (result) return;
-    const neighbors = adjacencyList.get(src);
-
-    visited.add(src);
-
-    for (const neighbor of neighbors) {
-      if (neighbor === destination) result = true;
-      if (!visited.has(neighbor)) findPath(neighbor);
+  while (shouldRun) {
+    shouldRun = false;
+    for (const [src, dest] of edges) {
+      if (visited[src] !== visited[dest]) {
+        visited[src] = true;
+        visited[dest] = true;
+        shouldRun = true;
+      }
+      if (visited[destination]) return true;
     }
-
-    return false;
   }
 
-  findPath(source);
-
-  return result;
+  return false;
 }
 
 // prettier-ignore
