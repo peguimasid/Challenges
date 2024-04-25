@@ -3,10 +3,11 @@
  * @return {string}
  */
 function bangBang(history) {
-  const split = history.split('\n');
-  const index = split[split.length - 1].match(/\d+/)[0];
+  const commands = history.split('\n');
+  const lastLine = commands[commands.length - 1].trim();
+  const lastCommand = lastLine.slice(lastLine.indexOf(' ') + 1).trim();
 
-  return split[split.length - 1].split(index).pop().trim();
+  return lastCommand;
 }
 
 const str1 =
