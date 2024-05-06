@@ -7,45 +7,23 @@ function ListNode(val, next) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-function reverseList(head) {
+function removeNodes(head) {
   let prev = null;
   while (head) [head.next, prev, head] = [prev, head, head.next];
-  return prev;
-}
 
-function addNode(head, value) {
-  const newNode = new ListNode(value);
+  let curr = prev.next;
+  prev.next = null;
 
-  if (!head) {
-    head = newNode;
-    return head;
-  }
-
-  newNode.next = head;
-  head = newNode;
-
-  return newNode;
-}
-
-/**
- * @param {ListNode} head
- * @return {ListNode}
- */
-function removeNodes(head) {
-  let max = -Infinity;
-
-  let list = reverseList(head);
-  let result = null;
-
-  while (list) {
-    if (list.val >= max) {
-      result = addNode(result, list.val);
+  while (curr) {
+    let temp = curr.next;
+    if (curr.val >= prev.val) {
+      curr.next = prev;
+      prev = curr;
     }
-    max = Math.max(max, list.val);
-    list = list.next;
+    curr = temp;
   }
 
-  return result;
+  return prev;
 }
 
 const ll1 = new ListNode(5);
@@ -61,4 +39,4 @@ ll2.next = new ListNode(1);
 ll2.next.next = new ListNode(1);
 ll2.next.next.next = new ListNode(1);
 
-console.log(removeNodes(ll2)); // 1 -> 1 -> 1 -> 1
+// console.log(removeNodes(ll2)); // 1 -> 1 -> 1 -> 1
