@@ -23,14 +23,14 @@ function getMaxAround(grid, x, y) {
 function largestLocal(grid) {
   const n = grid.length;
 
-  const result = new Array(n - 2)
-    .fill(null)
-    .map(() => new Array(n - 2).fill(0));
+  const result = [];
 
   for (let i = 0; i < n - 2; i++) {
+    const row = [];
     for (let j = 0; j < n - 2; j++) {
-      result[i][j] = getMaxAround(grid, i + 1, j + 1);
+      row.push(getMaxAround(grid, i + 1, j + 1));
     }
+    result.push(row);
   }
 
   return result;
