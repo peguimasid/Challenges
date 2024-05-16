@@ -9,18 +9,18 @@ function TreeNode(val, left, right) {
  * @return {boolean}
  */
 function evaluateTree(root) {
-  /**
-   * @param {TreeNode} node
-   * @return {boolean}
-   */
-  function postOrder(node) {
-    if (node.val === 1) return true;
-    if (node.val === 0) return false;
-    if (node.val === 3) return postOrder(node.left) && postOrder(node.right);
-    if (node.val === 2) return postOrder(node.left) || postOrder(node.right);
+  if (root.val === 0) {
+    return false;
   }
-
-  return postOrder(root);
+  if (root.val === 1) {
+    return true;
+  }
+  if (root.val === 3) {
+    return evaluateTree(root.left) && evaluateTree(root.right);
+  }
+  if (root.val === 2) {
+    return evaluateTree(root.left) || evaluateTree(root.right);
+  }
 }
 
 const tree = new TreeNode(2);
