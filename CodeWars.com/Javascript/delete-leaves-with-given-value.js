@@ -10,29 +10,10 @@ function TreeNode(val, left, right) {
  * @return {TreeNode}
  */
 function removeLeafNodes(root, target) {
-  let changes = true;
-
-  while (changes) {
-    changes = false;
-    let curr = root;
-
-    function traverse(node, prev, dir) {
-      if (!node.left && !node.right && node.val === target) {
-        if (!prev) {
-          root = null;
-          return;
-        }
-        prev[dir] = null;
-        changes = true;
-        return;
-      }
-      if (node.left) traverse(node.left, node, 'left');
-      if (node.right) traverse(node.right, node, 'right');
-    }
-
-    traverse(curr);
-  }
-
+  if (!root) return null;
+  root.left = removeLeafNodes(root.left, target);
+  root.right = removeLeafNodes(root.right, target);
+  if (!root.left && !root.right && root.val === target) return null;
   return root;
 }
 
