@@ -3,15 +3,15 @@
  * @return {number[][]}
  */
 function subsets(nums) {
-  const result = [];
+  const result = [[]];
 
-  function powerSet(array, index, curr) {
-    if (index === array.length) return result.push(curr);
-    powerSet(array, index + 1, [...curr, array[index]]);
-    powerSet(array, index + 1, curr);
+  for (const num of nums) {
+    const n = result.length;
+    for (let i = 0; i < n; i++) {
+      result.push([...result[i], num]);
+    }
   }
 
-  powerSet(nums, 0, []);
   return result;
 }
 
