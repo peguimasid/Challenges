@@ -9,5 +9,7 @@
     "vector": "cpp",
     "iosfwd": "cpp",
     "map": "cpp"
-  }
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
 }
