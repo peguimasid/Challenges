@@ -4,11 +4,13 @@
  */
 function specialArray(nums) {
   for (let x = 1; x <= nums.length; x++) {
-    const greaterThanX = nums.reduce((count, num) => {
+    let count = 0;
+
+    for (const num of nums) {
       if (num >= x) count++;
-      return count;
-    }, 0);
-    if (greaterThanX === x) return x;
+    }
+
+    if (count === x) return x;
   }
 
   return -1;
