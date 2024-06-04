@@ -3,27 +3,17 @@
  * @return {number}
  */
 function longestPalindrome(s) {
-  const frequency = s.split("").reduce((acc, curr) => {
-    acc[curr] = (acc[curr] || 0) + 1;
-    return acc;
-  }, {});
+  let frequency = {};
+  let oddFreqCount = 0;
 
-  const values = Object.values(frequency).sort((a, b) => b - a);
-
-  let result = 0;
-  let findOdd = false;
-
-  for (const value of values) {
-    const isOdd = value % 2 !== 0;
-    if (isOdd && !findOdd) {
-      result += value;
-      findOdd = true;
-    } else {
-      result += isOdd ? value - 1 : value;
-    }
+  for (const char of s) {
+    frequency[char] = (frequency[char] || 0) + 1;
+    oddFreqCount += frequency[char] % 2 !== 0 ? 1 : -1;
   }
 
-  return result;
+  if (oddFreqCount > 1) return s.length - oddFreqCount + 1;
+
+  return s.length;
 }
 
 console.log(longestPalindrome("abccccdd")); // 7
