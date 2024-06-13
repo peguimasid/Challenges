@@ -9,7 +9,7 @@ function minMovesToSeat(seats, students) {
 
   let result = 0;
 
-  for (let i = 0; i < seats.length; i++) {
+  for (const i in seats) {
     result += Math.abs(seats[i] - students[i]);
   }
 
@@ -17,4 +17,4 @@ function minMovesToSeat(seats, students) {
 }
 
 console.log(minMovesToSeat([3, 1, 5], [2, 7, 4])); // 4
-// console.log(minMovesToSeat([4, 1, 5, 9], [1, 3, 2, 6])); // 7
+console.log(minMovesToSeat([4, 1, 5, 9], [1, 3, 2, 6])); // 7
