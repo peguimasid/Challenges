@@ -3,19 +3,9 @@
  * @return {number}
  */
 function findCenter(edges) {
-  const adjacencyList = edges.reduce((map, [n1, n2]) => {
-    if (!map[n1]) map[n1] = [];
-    if (!map[n2]) map[n2] = [];
-
-    map[n1].push(n2);
-    map[n2].push(n1);
-
-    return map;
-  }, {});
-
-  for (const node in adjacencyList) {
-    if (adjacencyList[node].length > 1) return node;
-  }
+  return edges[0][0] === edges[1][0] || edges[0][0] === edges[1][1]
+    ? edges[0][0]
+    : edges[0][1];
 }
 
 const edges = [
