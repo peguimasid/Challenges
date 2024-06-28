@@ -6,28 +6,20 @@
 function maximumImportance(n, roads) {
   const importance = new Array(n).fill(0);
 
-  const adjacencyList = roads.reduce((map, [n1, n2]) => {
-    if (!map[n1]) map[n1] = [];
-    if (!map[n2]) map[n2] = [];
-    map[n1].push(n2);
-    map[n2].push(n1);
-    return map;
-  }, {});
-
-  const entries = Object.entries(adjacencyList).toSorted(
-    (a, b) => b[1].length - a[1].length
-  );
-
-  for (let i = n - 1; i >= 0; i--) {
-    if (entries[i]) {
-      importance[entries[i][0]] = n - i;
-    }
+  for (const [src, dest] of roads) {
+    importance[src]++;
+    importance[dest]++;
   }
+
+  const cities = new Array(n)
+    .fill(0)
+    .map((_, i) => i)
+    .toSorted((a, b) => importance[b] - importance[a]);
 
   let result = 0;
 
-  for (const [src, dest] of roads) {
-    result += importance[src] + importance[dest];
+  for (let i = 0; i < n; i++) {
+    result += (n - i) * importance[cities[i]];
   }
 
   return result;
@@ -35,11 +27,11 @@ function maximumImportance(n, roads) {
 
 // prettier-ignore
 const r = [[0,1],[1,2],[2,3],[0,2],[1,3],[2,4]]
-// console.log(maximumImportance(5, r));
+console.log(maximumImportance(5, r));
 
 // prettier-ignore
 const r2 = [[0,3],[2,4],[1,3]]
-// console.log(maximumImportance(5, r2));
+console.log(maximumImportance(5, r2));
 
 // prettier-ignore
 const r3 = [[0,1]]
