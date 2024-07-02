@@ -3,8 +3,13 @@
  * @return {boolean}
  */
 function threeConsecutiveOdds(arr) {
-  for (let i = 0; i < arr.length - 2; i++) {
-    if (arr[i] % 2 && arr[i + 1] % 2 && arr[i + 2] % 2) return true;
+  let oddCount = 0;
+
+  for (const value of arr) {
+    const isOdd = value % 2;
+    if (isOdd && oddCount === 2) return true;
+    if (isOdd && oddCount < 2) oddCount++;
+    if (!isOdd) oddCount = 0;
   }
 
   return false;
