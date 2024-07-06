@@ -4,21 +4,10 @@
  * @return {number}
  */
 function passThePillow(n, time) {
-  let currentPillowPosition = 1;
-  let dir = 1;
+  const fullRounds = Math.floor(time / (n - 1));
+  const extraTime = time % (n - 1);
 
-  while (time) {
-    const pos = currentPillowPosition + dir;
-
-    if (pos > 0 && pos <= n) {
-      currentPillowPosition += dir;
-      time--;
-    } else {
-      dir *= -1;
-    }
-  }
-
-  return currentPillowPosition;
+  return fullRounds % 2 === 0 ? extraTime + 1 : n - extraTime;
 }
 
 console.log(passThePillow(4, 5)); // 2
