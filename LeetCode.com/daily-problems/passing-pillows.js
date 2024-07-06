@@ -4,16 +4,15 @@
  * @return {number}
  */
 function passThePillow(n, time) {
-  let currentTime = 0;
   let currentPillowPosition = 1;
   let dir = 1;
 
-  while (currentTime < time) {
+  while (time) {
     const pos = currentPillowPosition + dir;
 
     if (pos > 0 && pos <= n) {
       currentPillowPosition += dir;
-      currentTime++;
+      time--;
     } else {
       dir *= -1;
     }
