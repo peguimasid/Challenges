@@ -3,18 +3,15 @@
  * @return {number}
  */
 function minOperations(logs) {
-  const stack = [];
+  let count = 0;
 
   for (const log of logs) {
     if (log === "./") continue;
-    if (log === "../") {
-      stack.pop();
-    } else {
-      stack.push(1);
-    }
+    if (log === "../") count = Math.max(count - 1, 0);
+    else count++;
   }
 
-  return stack.length;
+  return count;
 }
 
 console.log(minOperations(["d1/", "d2/", "../", "d21/", "./"])); // 2
