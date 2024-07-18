@@ -10,48 +10,36 @@ function TreeNode(val, left, right) {
  * @return {number}
  */
 function countPairs(root, distance) {
-  const adjList = {};
-  const leafNodes = new Set();
+  let result = 0;
 
   const dfs = (node) => {
-    if (!adjList[node.val]) {
-      adjList[node.val] = [];
+    if (!node) return [];
+    if (!node.left && !node.right) return [1];
+
+    const left = dfs(node.left);
+    const right = dfs(node.right);
+
+    for (const l of left) {
+      for (const r of right) {
+        if (l + r <= distance) result++;
+      }
     }
-    if (!node.left && !node.right) {
-      leafNodes.add(node.val);
+
+    const distances = [];
+
+    for (const l of left) {
+      if (l < distance) distances.push(l + 1);
     }
-    if (node.left) {
-      if (!adjList[node.left.val]) adjList[node.left.val] = [];
-      adjList[node.left.val].push(node.val);
-      adjList[node.val].push(node.left.val);
-      dfs(node.left);
+    for (const r of right) {
+      if (r < distance) distances.push(r + 1);
     }
-    if (node.right) {
-      if (!adjList[node.right.val]) adjList[node.right.val] = [];
-      adjList[node.right.val].push(node.val);
-      adjList[node.val].push(node.right.val);
-      dfs(node.right);
-    }
+
+    return distances;
   };
 
   dfs(root);
 
-  let result = 0;
-
-  const findAnotherGoodLeaf = (value, currentDistance, visited) => {
-    if (currentDistance > distance) return;
-    if (!visited.has(value) && leafNodes.has(value)) result++;
-    visited.add(value);
-    for (const neighbor of adjList[value]) {
-      findAnotherGoodLeaf(neighbor, currentDistance + 1, visited);
-    }
-  };
-
-  for (const leafValue of leafNodes.values()) {
-    findAnotherGoodLeaf(leafValue, 0, new Set().add(leafValue));
-  }
-
-  return result / 2;
+  return result;
 }
 
 const tree1 = new TreeNode(1);
@@ -68,3 +56,8 @@ tree2.left.right = new TreeNode(5);
 tree2.right.left = new TreeNode(6);
 tree2.right.right = new TreeNode(7);
 console.log(countPairs(tree2, 3)); // 2
+
+const tree3 = new TreeNode(1);
+tree3.left = new TreeNode(1);
+tree3.right = new TreeNode(1);
+console.log(countPairs(tree3, 2)); // 1
