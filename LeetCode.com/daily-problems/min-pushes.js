@@ -3,24 +3,18 @@
  * @return {number}
  */
 function minimumPushes(word) {
-  const lettersFrequency = word.split("").reduce((acc, curr) => {
-    acc[curr] = (acc[curr] || 0) + 1;
-    return acc;
-  }, {});
+  const frequency = new Array(26).fill(0);
 
-  const sortedWord = Object.entries(lettersFrequency)
-    .sort((a, b) => b[1] - a[1])
-    .map(([letter, frequency]) => letter.repeat(frequency))
-    .join("");
+  for (const char of word) {
+    frequency[char.charCodeAt() - 97]++;
+  }
+
+  frequency.sort((a, b) => b - a);
 
   let result = 0;
-  let count = 0;
 
-  for (let i = 0; i < sortedWord.length; i++) {
-    const prevChar = sortedWord?.[i - 1];
-    const currChar = sortedWord[i];
-    if (prevChar && prevChar !== currChar) count++;
-    result += Math.floor(count / 8) + 1;
+  for (let i = 0; i < 26 && frequency[i] !== 0; i++) {
+    result += frequency[i] * Math.floor(i / 8 + 1);
   }
 
   return result;
