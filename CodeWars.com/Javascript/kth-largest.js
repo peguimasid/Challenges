@@ -1,8 +1,8 @@
-/**
- * @param {number} k
- * @param {number[]} nums
- */
 class KthLargest {
+  /**
+   * @param {number} k
+   * @param {number[]} nums
+   */
   constructor(k, nums) {
     this.nums = nums;
     this.k = k;
@@ -12,7 +12,8 @@ class KthLargest {
    * @return {number}
    */
   add(val) {
-    this.nums = [...this.nums, val].sort((a, b) => b - a);
+    this.nums.push(val);
+    this.nums = this.nums.toSorted((a, b) => b - a);
     return this.nums[this.k - 1];
   }
 }
