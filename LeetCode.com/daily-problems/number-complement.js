@@ -3,14 +3,9 @@
  * @return {number}
  */
 function findComplement(num) {
-  return parseInt(
-    num
-      .toString(2)
-      .split("")
-      .map((c) => (c === "1" ? "0" : "1"))
-      .join(""),
-    2
-  );
+  if (num === 0) return 1;
+
+  return num ^ ((1 << num.toString(2).length) - 1);
 }
 
 console.log(findComplement(5)); // 2
