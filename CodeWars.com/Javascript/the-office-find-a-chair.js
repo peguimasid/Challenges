@@ -7,18 +7,14 @@ function meeting(x, need) {
   if (need === 0) return "Game On";
 
   const result = [];
-  let sum = 0;
-  let workNeed = need;
 
-  for (const [people, chairsAmount] of x) {
-    const availableChairs = Math.max(chairsAmount - people.length, 0);
-    const grabbedChairs = Math.min(availableChairs, workNeed);
+  for (const [people, chairs] of x) {
+    const take = Math.min(Math.max(chairs - people.length, 0), need);
 
-    sum += grabbedChairs;
-    result.push(grabbedChairs);
-    workNeed -= grabbedChairs;
+    result.push(take);
+    need -= take;
 
-    if (sum >= need) {
+    if (need <= 0) {
       return result;
     }
   }
