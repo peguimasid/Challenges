@@ -7,12 +7,14 @@
 function construct2DArray(original, m, n) {
   if (m * n !== original.length) return [];
 
-  const result = new Array(m).fill(null).map(() => new Array(n).fill(null));
+  const result = new Array(m).fill(null).map(() => new Array(n).fill(0));
 
-  for (let i = 0; i < original.length; i++) {
-    const row = Math.floor(i / n);
-    const col = i % n;
-    result[row][col] = original[i];
+  let index = 0;
+
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      result[i][j] = original[index++];
+    }
   }
 
   return result;
