@@ -4,11 +4,15 @@
  * @return {number}
  */
 function chalkReplacer(chalk, k) {
-  let i = 0;
-  while (true) {
-    if (k < chalk[i]) return i;
-    k -= chalk[i];
-    i = (i + 1) % chalk.length;
+  const sumOfChalk = chalk.reduce((acc, curr) => acc + curr, 0);
+
+  let remainingChalk = k % sumOfChalk;
+
+  for (let i = 0; i < chalk.length; i++) {
+    if (remainingChalk < chalk[i]) {
+      return i;
+    }
+    remainingChalk -= chalk[i];
   }
 }
 
